@@ -1,0 +1,203 @@
+@layer base, components;
+@layer base {
+  .theme-root { min-height: 100dvh; }
+  button, select, input, textarea { font: inherit; }
+  button { color: inherit; }
+  .visually-hidden:where(:not(:focus-within, :active)) { position: absolute; clip-path: inset(50%); overflow: hidden; inline-size: 1px; block-size: 1px; white-space: nowrap; }
+  :where(button, select, input, textarea):focus-visible { outline: 2px solid #0078d2; outline-offset: 2px; }
+}
+@layer components {
+  .app-shell { min-height: 100dvh; background: #ecf1f4; color: #002033; font-family: Inter, Arial, sans-serif; }
+  .topbar { position: relative; z-index: 50; min-height: 48px; box-sizing: border-box; display: flex; align-items: center; gap: 24px; padding: 7px 16px; overflow: visible; border-block-end: 1px solid rgba(0,65,102,.2); background: #dee4e8; }
+  .brand-block { display: flex; align-items: center; min-inline-size: 0; }
+  .brand-block { gap: 12px; }
+  .header-field { flex: 0 0 auto; }
+  .header-section { inline-size: 260px; }
+  .header-section-dropdown { z-index: 101 !important; }
+  .toolbar-tooltip { z-index: 1000 !important; }
+  .toolbar-tooltip .Text { font-size: 12px; line-height: 16px; }
+  .header-menu-button { flex: 0 0 auto; }
+  .icon-button { display: grid; place-items: center; border: 0; background: transparent; border-radius: 4px; min-inline-size: 24px; min-block-size: 24px; padding: 0; cursor: pointer; }
+  .glyph { color: #286985; font-size: 13px; line-height: 1; }
+  .workspace { position: relative; min-height: calc(100dvh - 48px); overflow: clip; }
+  .assistant-page { min-block-size: calc(100dvh - 48px); box-sizing: border-box; padding: 56px 16px 16px; background: #ecf1f4; overflow: auto; }
+  .assistant-controls { position: absolute; z-index: 3; inset-block-start: 0; inset-inline: 0; display: flex; align-items: center; gap: 12px; box-sizing: border-box; block-size: 40px; padding: 4px 16px; border-block-end: 1px solid rgba(0,65,102,.2); background: #fff; }
+  .assistant-mini-tools { display: flex; gap: 4px; }
+  .assistant-mini-tools .tool-icon { inline-size: 12px; block-size: 12px; }
+  .assistant-tabs { align-self: stretch; min-inline-size: 0; overflow: visible; }
+  .assistant-chart-card { max-inline-size: 1540px; block-size: 400px; box-sizing: border-box; padding: 20px; border: 1px solid rgba(0,65,102,.2); border-radius: 4px; background: #fff; box-shadow: 0 2px 2px rgba(0,32,51,.02), 0 2px 8px rgba(0,32,51,.16); }
+  .scheme.is-comment-mode, .scheme.is-comment-mode :where(.well-target, .comment-marker), .assistant-page.is-comment-mode .assistant-chart-card, .assistant-page.is-comment-mode .assistant-chart-card * { cursor: url('/assets/comment-cursor.svg') 5 5, crosshair; }
+  .assistant-chart-title { color: #0078d2; font-size: 14px; font-weight: 600; }
+  .assistant-chart-body { display: flex; gap: 32px; block-size: 320px; margin-block-start: 20px; }
+  .assistant-year-total { inline-size: 70px; display: flex; flex-direction: column; align-items: center; border-inline-end: 1px solid rgba(0,65,102,.2); color: #002033; font-size: 10px; }
+  .assistant-year-total strong, .assistant-year-total span { font-size: 10px; font-weight: 400; }
+  .assistant-year-total div { position: relative; flex: 1; inline-size: 46px; margin-block: 4px 8px; background: #f1565e; }
+  .assistant-year-total div i { position: absolute; inset: 50% 0 auto; color: #fff; font-size: 9px; font-style: normal; text-align: center; }
+  .assistant-year-total small { color: rgba(0,32,51,.6); font-size: 10px; }
+  .assistant-echart-wrap { position: relative; flex: 1; min-inline-size: 0; block-size: 100%; }
+  .assistant-echart { inline-size: 100%; block-size: 100%; }
+  .chart-comment-anchor { --target-x: 50%; --target-y: 50%; position: absolute; z-index: 5; inset-inline-start: var(--target-x); inset-block-start: var(--target-y); inline-size: 20px; block-size: 20px; translate: -50% -50%; border: 0; border-radius: 50% 50% 50% 3px; background: #0078d2; box-shadow: 0 2px 6px rgba(0,32,51,.22); }
+  .chart-comment-composer { --target-x: 50%; --target-y: 50%; position: absolute; z-index: 6; inset-block-start: clamp(90px, var(--target-y), calc(100% - 90px)); inline-size: min(320px, calc(100% - 24px)); box-sizing: border-box; padding: 12px; border: 0; border-radius: 12px; background: #22282c; box-shadow: 0 10px 22px rgba(0,32,51,.32); color: #fff; cursor: default !important; }
+  .chart-comment-composer, .chart-comment-composer * { cursor: default !important; }
+  .chart-comment-composer.is-right { inset-inline-start: calc(var(--target-x) + 22px); translate: 0 -50%; }
+  .chart-comment-composer.is-left { inset-inline-start: calc(var(--target-x) - 22px); translate: -100% -50%; }
+  .chart-comment-heading { display: flex; align-items: center; justify-content: space-between; margin-block-end: 8px; cursor: default !important; }
+  .chart-comment-heading strong { color: #fff; font-size: 12px; line-height: 16px; font-weight: 600; cursor: default !important; }
+  .chart-comment-close { color: #fff !important; cursor: pointer !important; }
+  .chart-comment-close svg { inline-size: 12px; block-size: 12px; }
+  .chart-comment-composer textarea { min-block-size: 64px; padding: 6px 8px; border: 1px solid rgba(255,255,255,.32); border-radius: 6px; background: transparent; color: #fff; font-size: 12px; line-height: 16px; cursor: text !important; }
+  .chart-comment-composer textarea::placeholder { color: rgba(255,255,255,.34); }
+  .chart-comment-attachments { display: flex; flex-direction: column; gap: 4px; margin: 8px 0 0; padding: 0; list-style: none; }
+  .chart-comment-attachments li { display: flex; align-items: center; justify-content: space-between; gap: 6px; min-inline-size: 0; padding: 3px 4px 3px 8px; border-radius: 4px; background: rgba(255,255,255,.08); font-size: 12px; line-height: 16px; }
+  .chart-comment-attachments li > span { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .chart-comment-actions { display: flex; align-items: center; justify-content: space-between; margin-block-start: 8px; cursor: default !important; }
+  .chart-comment-actions * { cursor: pointer !important; }
+  .chart-comment-attach { color: rgba(255,255,255,.88) !important; }
+  .chart-comment-attach:hover { background: rgba(255,255,255,.12) !important; color: #fff !important; }
+  .chart-comment-attach svg { color: currentColor; fill: currentColor; }
+  .comment-marker.assistant-chart-comment-marker { inset-inline-start: var(--marker-x); inset-block-start: var(--marker-y); inset-block-end: auto; translate: -50% calc(-100% - 7px); min-inline-size: 44px; min-block-size: 28px; gap: 4px; padding-inline: 6px; border-radius: 12px; pointer-events: auto; }
+  .comment-marker.assistant-chart-comment-marker::after { inset-block-end: -4px; inline-size: 8px; block-size: 8px; }
+  .comment-marker.assistant-chart-comment-marker svg { inline-size: 14px; block-size: 14px; }
+  .comment-marker.assistant-chart-comment-marker span { font-size: 12px; }
+  .comment-marker.assistant-chart-comment-marker.has-unread .unread-indicator { inline-size: 8px; block-size: 8px; }
+  .toolbars { position: absolute; z-index: 5; inset-block-start: 12px; inset-inline-start: 12px; display: flex; gap: 8px; }
+  .toolbar { display: flex; gap: 4px; padding: 4px; background: #fff; border: 1px solid rgba(0,65,102,.2); border-radius: 6px; box-shadow: 0 2px 1px rgba(0,32,51,.02), 0 2px 4px rgba(0,32,51,.16); }
+  .tool { flex: 0 0 auto; }
+  .tool-icon { display: block; inline-size: 12px; block-size: 12px; background: currentColor; mask: var(--tool-icon) center / contain no-repeat; }
+  .object-card { position: absolute; z-index: 4; inset-block: 54px 12px; inset-inline-start: 12px; inline-size: 460px; box-sizing: border-box; display: flex; flex-direction: column; padding: 20px 16px 0; border: 1px solid rgba(0,65,102,.2); border-radius: 8px; background: #fff; box-shadow: 0 4px 8px rgba(0,32,51,.16); overflow: hidden; }
+  .card-heading { display: flex; flex: 0 0 auto; align-items: center; justify-content: space-between; min-block-size: 24px; box-sizing: border-box; margin: 0 0 16px; }
+  .page-comments-card { padding: 0; box-shadow: 0 4px 4px rgba(0,32,51,.04), 0 8px 24px rgba(0,32,51,.12); }
+  .page-comments-heading { min-block-size: 60px; margin: 0; padding: 20px 16px 16px; }
+  .page-comments-heading h2 { margin: 0; }
+  .assistant-object-card { padding-block-end: 0; }
+  .assistant-object-comments { margin-block-start: 0; }
+  .page-comments-list { --scrollbar-thumb: rgba(0,32,51,.3); --scrollbar-track: transparent; flex: 1 1 auto; min-block-size: 0; overflow-y: auto; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); scrollbar-width: thin; overscroll-behavior: contain; }
+  .comment-group-heading { display: flex; align-items: center; justify-content: space-between; min-block-size: 32px; box-sizing: border-box; padding: 4px 16px; background: #ecf1f4; }
+  .page-comment-items { display: flex; flex-direction: column; }
+  .page-comment { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; padding: 12px 16px; font-size: 12px; }
+  .page-comment :where(strong, small, p, span, button, textarea) { font-size: 12px; }
+  .page-comment-content { min-inline-size: 0; }
+  .page-comment-author { display: flex; align-items: center; gap: 6px; min-inline-size: 0; }
+  .page-comment-author i { flex: 0 0 auto; inline-size: 6px; block-size: 6px; border-radius: 50%; background: #0ba5ff; }
+  .page-comment-author strong { min-inline-size: 0; flex: 1 1 auto; overflow: hidden; font-size: 12px; line-height: 1.5; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+  .page-comment-menu { flex: 0 0 auto; margin-block: -7px; margin-inline-end: -8px; }
+  .page-comment small { display: block; overflow: hidden; color: rgba(0,32,51,.6); font-size: 12px; line-height: 1.5; text-overflow: ellipsis; white-space: nowrap; }
+  .page-comment-reply-reference { display: flex; align-items: center; gap: 4px; min-inline-size: 0; margin-block-start: 3px; color: #286985; font-size: 12px; line-height: 1.5; }
+  .page-comment-reply-reference svg { flex: 0 0 auto; }
+  .page-comment-reply-reference span { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-wrap: nowrap; }
+  .page-comment p { margin: 2px 0 0; color: #002033; font-size: 12px; line-height: 1.5; }
+  .page-comment-inline-form { display: flex; flex-direction: column; gap: 8px; margin-block-start: 8px; }
+  .page-comment-inline-form textarea { min-block-size: 64px; padding: 8px; border: 1px solid rgba(0,66,105,.28); border-radius: 4px; background: #fff; }
+  .page-comment-inline-form textarea:focus { border-color: #0078d2; box-shadow: 0 0 0 1px #0078d2; }
+  .page-comment-inline-actions { display: flex; justify-content: flex-end; gap: 8px; }
+  .badges { display: flex; gap: 4px; margin-block-end: 12px; }
+  .badges span { padding: 3px 5px; border-radius: 4px; background: #45b6e8; color: #fff; font-size: 10px; font-weight: 600; }
+  .badges span:not(:first-child) { background: #22c38e; }
+  .object-card h1 { margin: 0 0 18px; font-size: 16px; line-height: 1.5; font-weight: 400; }
+  .sidebar-tabs { margin-block-start: 18px; }
+  .sidebar-tabs b { padding: 3px 5px; border-radius: 4px; background: #dee4e8; color: rgba(0,32,51,.6); font-size: 10px; font-weight: 400; }
+  .sidebar-icon-button { flex: 0 0 auto; }
+  textarea { box-sizing: border-box; inline-size: 100%; min-block-size: 76px; resize: vertical; padding: 10px 12px; border: 0; background: transparent; color: #002033; font-size: 12px; outline: 0; }
+  textarea::placeholder { color: rgba(0,32,51,.35); }
+  .comment-form { flex: 0 0 auto; }
+  .composer { margin-block: 16px 12px; overflow: hidden; border: 1px solid rgba(0,66,105,.28); border-radius: 8px; background: #fff; transition: border-color .15s ease, box-shadow .15s ease; }
+  .composer:focus-within { border-color: #0078d2; box-shadow: 0 0 0 1px #0078d2; }
+  .composer-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-block-size: 42px; padding: 6px 8px; border-block-start: 1px solid rgba(0,65,102,.16); }
+  .attach-button { flex: 0 0 auto; }
+  .attachment-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0 12px 12px; list-style: none; }
+  .attachment-list li { position: relative; display: flex; align-items: center; gap: 8px; min-inline-size: 0; border: 1px solid rgba(0,65,102,.16); border-radius: 8px; background: #f4f7f8; }
+  .attachment-list .image-attachment { inline-size: 88px; block-size: 72px; overflow: visible; }
+  .attachment-list .image-attachment img { inline-size: 100%; block-size: 100%; border-radius: 7px; object-fit: cover; }
+  .attachment-list .file-attachment { max-inline-size: 220px; padding: 8px 32px 8px 9px; }
+  .attachment-list .file-icon, .comment-attachments > li > span:first-child { flex: 0 0 auto; color: #0078d2; font-size: 14px; }
+  .file-details, .comment-attachments li > span:last-child { min-inline-size: 0; flex: 1 1 auto; }
+  .attachment-list strong, .comment-attachments strong { display: block; overflow: hidden; color: #002033; font-size: 11px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+  .attachment-list small, .comment-attachments small { color: rgba(0,32,51,.55); font-size: 10px; }
+  .attachment-list .attachment-remove { position: absolute; inset-block-start: -8px; inset-inline-end: -8px; border: 2px solid #fff; border-radius: 50%; background: #002033; color: #fff; }
+  .attachment-list .attachment-remove:hover { background: #df3f3f; }
+  .comment-attachments { display: flex; flex-direction: column; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; }
+  .comment-attachments li { display: flex; align-items: center; gap: 8px; min-inline-size: 0; padding: 7px 8px; border: 1px solid rgba(0,65,102,.16); border-radius: 4px; background: #f4f7f8; }
+  .comments { --scrollbar-thumb: rgba(0,32,51,.3); --scrollbar-track: rgba(0,32,51,.06); flex: 1 1 auto; min-block-size: 0; overflow-y: auto; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); scrollbar-width: thin; scrollbar-gutter: stable; overscroll-behavior: contain; padding-inline-end: 4px; }
+  .comment { position: relative; display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 12px; margin-block-end: 14px; font-size: 12px; }
+  .comment :where(strong, small, p, span, button, textarea) { font-size: 12px; }
+  .comment.is-highlighted { margin-inline: -8px 0; padding: 8px; border-radius: 6px; animation: comment-highlight-fade 3s ease-out forwards; }
+  .comment.is-reply { margin-inline-start: 32px; }
+  .avatar { display: grid; place-items: center; inline-size: 24px; block-size: 24px; border-radius: 50%; background: #286985; color: #fff; font-size: 8px; font-weight: 600; }
+  .avatar.tone-0 { background: #df3f3f; }
+  .avatar.tone-1 { background: #f38b00; }
+  .avatar.tone-2 { background: #7b61a8; }
+  .avatar.tone-3 { background: #0078d2; }
+  .avatar.tone-4 { background: #008f79; }
+  .avatar.tone-5 { background: #8a6500; }
+  .comment-content { min-inline-size: 0; }
+  .comment-title { display: flex; align-items: center; justify-content: space-between; }
+  .comment-title strong { overflow: hidden; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+  .comment-menu { flex: 0 0 auto; }
+  .comment small { display: block; color: rgba(0,32,51,.55); font-size: 12px; line-height: 1.5; }
+  .comment p { margin: 4px 0 0; font-size: 12px; line-height: 1.5; }
+  .comment-edit-form { display: flex; flex-direction: column; gap: 8px; margin-block-start: 8px; }
+  .comment-edit-toolbar { display: flex; align-items: center; gap: 8px; }
+  .comment-edit-actions { display: flex; align-items: center; gap: 8px; }
+  .comment-edit-toolbar .comment-edit-actions { margin-inline-start: auto; }
+  .edit-attachment-list { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; list-style: none; }
+  .edit-attachment-list li { display: flex; align-items: center; gap: 8px; min-inline-size: 0; padding: 5px 6px 5px 8px; border-radius: 4px; background: #f4f7f8; }
+  .edit-attachment-list li > span { min-inline-size: 0; flex: 1 1 auto; }
+  .edit-attachment-list strong { display: block; overflow: hidden; font-size: 11px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+  .edit-attachment-list small { color: rgba(0,32,51,.55); font-size: 10px; }
+  .comment-attachments { margin-block-start: 8px; }
+  .thread-reply-form { display: flex; flex-direction: column; gap: 8px; margin-block-start: 8px; }
+  .thread-reply-form textarea { min-block-size: 64px; padding: 8px; border: 1px solid rgba(0,66,105,.28); border-radius: 4px; background: #fff; }
+  .thread-reply-form textarea:focus { border-color: #0078d2; box-shadow: 0 0 0 1px #0078d2; }
+  .thread-reply-actions { display: flex; justify-content: flex-end; gap: 8px; }
+  .reply-link { grid-column: 1 / -1; justify-self: start; }
+  .comment-context-menu { z-index: 20; min-inline-size: 150px; }
+  .empty-tab { padding-block: 32px; }
+  .scheme { position: absolute; inset: 0; }
+  .well { --well-color: #20c997; --well-icon-width: 46px; --well-icon-height: 52px; --well-icon-bottom: 18px; position: absolute; inset-inline-start: var(--x); inset-block-start: var(--y); z-index: 1; inline-size: 90px; block-size: 90px; translate: -50% -50%; }
+  .well.selected { --well-icon-width: 56px; --well-icon-height: 70px; }
+  .well-target { position: relative; inline-size: 90px; block-size: 90px; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; }
+  .comment-marker { position: absolute; z-index: 2; inset-inline-start: 50%; inset-block-end: calc(var(--well-icon-bottom) + var(--well-icon-height) + 9px); translate: -50% 0; scale: 1; transform: translateY(0); display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-inline-size: 44px; min-block-size: 28px; padding: 0 6px; border: 0; border-radius: 12px; background: #163e52; box-shadow: 0 5px 14px rgba(0,32,51,.2); color: #fff; cursor: pointer; transition: inset-block-end .25s ease, background-color .18s ease, box-shadow .18s ease, scale .2s ease, transform .2s ease; }
+  .comment-marker::after { content: ''; position: absolute; inset-block-end: -4px; inset-inline-start: 50%; inline-size: 8px; block-size: 8px; border-radius: 1px; background: #163e52; rotate: 45deg; translate: -50% 0; }
+  .comment-marker svg { position: relative; z-index: 1; inline-size: 14px; block-size: 14px; fill: currentColor; }
+  .comment-marker span { position: relative; z-index: 1; font-size: 12px; line-height: 1; font-weight: 500; }
+  .unread-indicator { display: none; }
+  .comment-marker.has-unread .unread-indicator { position: absolute; z-index: 3; inset-block-start: -4px; inset-inline-end: -3px; display: block; inline-size: 8px; block-size: 8px; border: 2px solid #fff; border-radius: 50%; background: #0ba5ff; box-shadow: 0 1px 3px rgba(0,32,51,.22); }
+  .comment-marker:hover { box-shadow: 0 5px 14px rgba(0,32,51,.2); }
+  .comment-marker[aria-pressed=true] { background: #0078d2; box-shadow: 0 4px 12px rgba(0,120,210,.38); }
+  .comment-marker[aria-pressed=true]::after { background: #0078d2; }
+  .comment-marker[aria-pressed=true].has-unread .unread-indicator { border-color: #fff; }
+  .well-icon { position: absolute; inset-inline-start: 50%; inset-block-end: var(--well-icon-bottom); display: block; inline-size: var(--well-icon-width); block-size: var(--well-icon-height); translate: -50% 0; shape-rendering: geometricPrecision; transform: translateY(0); transform-origin: bottom center; filter: drop-shadow(0 4px 2px rgba(0,32,51,.04)) drop-shadow(0 8px 12px rgba(0,32,51,.12)); transition: inline-size .25s ease, block-size .25s ease, filter .25s ease; pointer-events: none; }
+  .well.selected .well-icon { filter: drop-shadow(0 0 8px rgba(0,120,210,.55)) drop-shadow(0 4.606px 2.303px rgba(0,32,51,.04)) drop-shadow(0 9.212px 13.818px rgba(0,32,51,.18)); }
+  .well-label { position: absolute; inset-inline: 0; inset-block-end: 0; display: block; inline-size: 100%; box-sizing: border-box; padding: 2px 4px; overflow: hidden; color: #002033; font-size: 10px; line-height: 12px; font-weight: 700; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+  .inactive-pin:hover :is(.pin-head, .comment-marker) { animation: pin-bounce .8s ease-out both; }
+  .comment-marker:hover { z-index: 4; scale: 1.06; transform: translateY(-3px); animation: none; box-shadow: 0 8px 18px rgba(0,32,51,.28); }
+  .inactive-pin:has(.comment-marker:hover) .pin-head { animation: none; }
+  .pin-activating .pin-head { transform-origin: bottom center; animation: pin-activate .38s cubic-bezier(.34,1.4,.64,1) both; }
+  @keyframes pin-bounce { 0% { transform: translateY(0); } 40% { transform: translateY(-9px); } 100% { transform: translateY(0); } }
+  @keyframes pin-activate { 0% { opacity: .5; transform: scale(.5); } 100% { opacity: 1; transform: scale(1); } }
+  @keyframes comment-highlight-fade { 0%, 25% { background: rgba(11,165,255,.2); box-shadow: inset 3px 0 #0ba5ff; } 100% { background: transparent; box-shadow: inset 3px 0 transparent; } }
+  @media (prefers-reduced-motion: reduce) {
+    .comment-marker { transition: background-color .18s ease, box-shadow .18s ease; }
+    .comment-marker:hover { scale: 1; transform: translateY(0); }
+    .inactive-pin:hover :is(.pin-head, .comment-marker), .pin-activating .pin-head, .comment.is-highlighted { animation: none; }
+    .comment.is-highlighted { background: rgba(11,165,255,.12); box-shadow: inset 3px 0 #0ba5ff; }
+  }
+  @supports not (scrollbar-color: auto) {
+    .comments::-webkit-scrollbar { inline-size: 6px; }
+    .comments::-webkit-scrollbar-thumb { border-radius: 3px; background: var(--scrollbar-thumb); }
+    .comments::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+    .page-comments-list::-webkit-scrollbar { inline-size: 6px; }
+    .page-comments-list::-webkit-scrollbar-thumb { border-radius: 3px; background: var(--scrollbar-thumb); }
+    .page-comments-list::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+  }
+  @media (max-width: 1100px) {
+    .workspace { min-height: calc(100dvh - 48px); }
+    .object-card { inline-size: min(460px, calc(100% - 24px)); }
+    .well { transform: translateX(160px); }
+  }
+  @media (max-width: 640px) {
+    .object-card { inset-block-end: 8px; }
+    .scheme { opacity: .32; }
+    .sidebar-tabs { overflow-x: auto; }
+  }
+}

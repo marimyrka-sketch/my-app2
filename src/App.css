@@ -295,10 +295,11 @@
   .comment-context-menu :where(li, [role=menuitem]) { min-inline-size: 0; white-space: nowrap; }
   .empty-tab { padding-block: 32px; }
   .scheme { position: absolute; inset: 0; overflow: hidden; background: #dce5e8 url('/assets/well-map-background.png') center / cover no-repeat; }
-  .well { --well-color: #20c997; --well-icon-width: 46px; --well-icon-height: 52px; --well-icon-bottom: 18px; position: absolute; inset-inline-start: var(--x); inset-block-start: var(--y); z-index: 1; inline-size: 90px; block-size: 90px; translate: -50% -50%; }
-  .well.selected { --well-icon-width: 56px; --well-icon-height: 70px; }
-  .well-target { position: relative; inline-size: 90px; block-size: 90px; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; }
-  .comment-marker { position: absolute; z-index: 2; inset-inline-start: 50%; inset-block-end: calc(var(--well-icon-bottom) + var(--well-icon-height) + 9px); translate: -50% 0; scale: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-inline-size: 44px; min-block-size: 28px; padding: 0 6px; border: 0; border-radius: 12px; background: #163e52; box-shadow: 0 5px 14px rgba(0,32,51,.2); color: #fff; cursor: pointer; transition: inset-block-end .25s ease, background-color .18s ease, box-shadow .18s ease, scale .2s ease, transform .2s ease; }
+  .well { --well-color: #f38b00; --well-icon-width: 40px; --well-icon-height: 40px; --well-icon-bottom: 39px; position: absolute; inset-inline-start: var(--x); inset-block-start: var(--y); z-index: 1; inline-size: 90px; block-size: 108px; translate: -50% -50%; }
+  .well.status-active { --well-color: #56B9F2; }
+  .well.selected { --well-icon-width: 56px; --well-icon-height: 70px; --well-icon-bottom: 39px; }
+  .well-target { position: relative; inline-size: 90px; block-size: 108px; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; }
+  .comment-marker { position: absolute; z-index: 2; inset-inline-start: 50%; inset-block-end: calc(var(--well-icon-bottom) + var(--well-icon-height) + 12px); translate: -50% 0; scale: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-inline-size: 44px; min-block-size: 28px; padding: 0 6px; border: 0; border-radius: 12px; background: #163e52; box-shadow: 0 5px 14px rgba(0,32,51,.2); color: #fff; cursor: pointer; transition: inset-block-end .25s ease, background-color .18s ease, box-shadow .18s ease, scale .2s ease, transform .2s ease; }
   .comment-marker::after { content: ''; position: absolute; inset-block-end: -4px; inset-inline-start: 50%; inline-size: 8px; block-size: 8px; border-radius: 1px; background: #163e52; rotate: 45deg; translate: -50% 0; }
   .comment-marker svg { position: relative; z-index: 1; display: block; flex: 0 0 14px; inline-size: 14px; block-size: 14px; fill: currentColor; }
   .comment-marker span { position: relative; z-index: 1; display: block; flex: 0 0 auto; min-block-size: 14px; font-size: 12px; line-height: 14px; font-weight: 500; }
@@ -308,14 +309,16 @@
   .comment-marker[aria-pressed=true] { background: #0078d2; box-shadow: 0 4px 12px rgba(0,120,210,.38); }
   .comment-marker[aria-pressed=true]::after { background: #0078d2; }
   .comment-marker[aria-pressed=true].has-unread .unread-indicator { border-color: #fff; }
-  .well-icon { position: absolute; inset-inline-start: 50%; inset-block-end: var(--well-icon-bottom); display: block; inline-size: var(--well-icon-width); block-size: var(--well-icon-height); translate: -50% 0; shape-rendering: geometricPrecision; transform-origin: bottom center; filter: drop-shadow(0 4px 2px rgba(0,32,51,.04)) drop-shadow(0 8px 12px rgba(0,32,51,.12)); transition: inline-size .25s ease, block-size .25s ease, filter .25s ease; pointer-events: none; }
-  .well.selected .well-icon { filter: drop-shadow(0 0 8px rgba(0,120,210,.55)) drop-shadow(0 4.606px 2.303px rgba(0,32,51,.04)) drop-shadow(0 9.212px 13.818px rgba(0,32,51,.18)); }
+  .well-icon { position: absolute; inset-inline-start: 50%; inset-block-end: var(--well-icon-bottom); display: block; inline-size: var(--well-icon-width); block-size: var(--well-icon-height); translate: -50% 0; transform-origin: center; transition: inline-size .25s ease, block-size .25s ease, inset-block-end .25s ease, box-shadow .25s ease, filter .25s ease; pointer-events: none; }
+  .well-default-icon { display: grid; place-items: center; border-radius: 50%; background: #fff; box-shadow: 0 6px 16px rgba(0,32,51,.28); }
+  .well-default-icon::before { content: ""; display: block; inline-size: calc(100% - 10px); block-size: calc(100% - 10px); border-radius: 50%; background: var(--well-color); }
+  .well-active-icon { shape-rendering: geometricPrecision; filter: drop-shadow(0 0 8px rgba(0,120,210,.55)) drop-shadow(0 4.606px 2.303px rgba(0,32,51,.04)) drop-shadow(0 9.212px 13.818px rgba(0,32,51,.18)); }
   .well-target:hover, .well-target:focus-visible { background: transparent; box-shadow: none; }
   .well.selected:hover .well-icon, .well.selected .well-target:hover .well-icon { filter: drop-shadow(0 0 8px rgba(0,120,210,.55)) drop-shadow(0 4.606px 2.303px rgba(0,32,51,.04)) drop-shadow(0 9.212px 13.818px rgba(0,32,51,.18)); }
   .well.selected:hover .well-icon { animation: pin-bounce .8s ease-out both; }
   .well.selected:hover .comment-marker { animation: pin-bounce .8s ease-out both; }
   .well.selected:has(.comment-marker:hover) .well-icon { animation: pin-bounce .8s ease-out both; }
-  .well-label { position: absolute; left: 0; right: 0; inset-block-end: 0; display: block; inline-size: 100%; box-sizing: border-box; padding: 2px 4px; overflow: hidden; color: #002033; font-size: 10px; line-height: 12px; font-weight: 700; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+  .well-label { position: absolute; inset-inline-start: 50%; inset-block-end: 7px; display: block; max-inline-size: 86px; box-sizing: border-box; padding: 4px 8px; overflow: hidden; border-radius: 6px; background: #fff; box-shadow: 0 5px 14px rgba(0,32,51,.22); color: #002033; font-size: 13px; line-height: 16px; font-weight: 700; text-align: center; text-overflow: ellipsis; white-space: nowrap; translate: -50% 0; }
   .inactive-pin:hover :is(.pin-head, .comment-marker) { animation: pin-bounce .8s ease-out both; }
   .comment-marker:hover { z-index: 4; scale: 1.06; transform: translateY(-3px); animation: none; box-shadow: 0 8px 18px rgba(0,32,51,.28); }
   .inactive-pin:has(.comment-marker:hover) .pin-head { animation: none; }
@@ -935,4 +938,3 @@
 /* Variant 2: use a 4px vertical gap between task rows. */
 .variant-two-object-card .task-card-schedule,
 .variant-two-object-card .task-card-parties { margin-block-start: 4px; }
-

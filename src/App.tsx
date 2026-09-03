@@ -496,7 +496,7 @@ function VisualAssistant({ commentsOpen, commentCount, showCommentMarkers, selec
 }
 
 function App() {
-  const [selectedWell, setSelectedWell] = useState<number | null>(20)
+  const [selectedWell, setSelectedWell] = useState<number | null>(null)
   const [section, setSection] = useState(sections[0])
   const [assistantTab, setAssistantTab] = useState(assistantTabs[0])
   const [assistantCommentContext, setAssistantCommentContext] = useState<string | null>(null)
@@ -1328,8 +1328,7 @@ function App() {
             {wells.map((well) => {
               const isSelected = selectedWell === well.id
               const hasUnread = unreadWellIds.has(well.id)
-              const icon = isSelected ? '/assets/well-active.svg' : well.status === 'alert' ? '/assets/well-alert.svg' : '/assets/well-ok.svg'
-              const className = ['well', isSelected ? 'selected' : 'inactive-pin', activatingWell === well.id ? 'pin-activating' : ''].filter(Boolean).join(' ')
+              const className = ['well', `status-${well.status}`, isSelected ? 'selected' : 'inactive-pin', activatingWell === well.id ? 'pin-activating' : ''].filter(Boolean).join(' ')
               return <div key={well.id} className={className} style={{ '--x': well.x + '%', '--y': well.y + '%' } as CSSProperties}>
                 {showCommentMarkers && <button className={'comment-marker ' + (hasUnread ? 'has-unread' : 'is-read')} onClick={() => openComments(well.id)} aria-label={`${well.name}: ${threadComments.length} комментариев${hasUnread ? ', есть новые' : ', все прочитаны'}`} aria-pressed={isSelected}>
                   <CommentGlyph />
@@ -1337,8 +1336,8 @@ function App() {
                   <i className="unread-indicator" aria-hidden="true" />
                 </button>}
                 <button className="well-target" onClick={() => selectWell(well.id)} aria-label={well.name} aria-pressed={isSelected}>
-                  <img className="well-icon pin-head" src={icon} alt="" aria-hidden="true" />
-                  <span className="well-label">{well.name}</span>
+                  {isSelected ? <img className="well-icon well-active-icon pin-head" src="/assets/well-active.svg" alt="" aria-hidden="true" /> : <span className="well-icon well-default-icon pin-head" aria-hidden="true" />}
+                  <span className="well-label">{well.name.match(/\d+/)?.[0] ?? well.name}</span>
                 </button>
               </div>
             })}

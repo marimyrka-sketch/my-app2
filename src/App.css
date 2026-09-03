@@ -12,7 +12,7 @@
   .brand-block { display: flex; align-items: center; min-inline-size: 0; }
   .brand-block { gap: 12px; }
   .header-field { flex: 0 0 auto; }
-  .header-section { inline-size: 260px; }
+  .header-section { inline-size: 240px; flex-basis: 240px; }
   .header-section-dropdown { z-index: 101 !important; }
   .toolbar-tooltip { z-index: 1000 !important; }
   .toolbar-tooltip .Text { font-size: 12px; line-height: 16px; }
@@ -20,6 +20,7 @@
   .icon-button { display: grid; place-items: center; border: 0; background: transparent; border-radius: 4px; min-inline-size: 24px; min-block-size: 24px; padding: 0; cursor: pointer; }
   .glyph { color: #286985; font-size: 13px; line-height: 1; }
   .workspace { position: relative; min-height: calc(100dvh - 48px); overflow: clip; }
+  .variant-empty { min-block-size: calc(100dvh - 48px); background: #ecf1f4; }
   .assistant-page { min-block-size: calc(100dvh - 48px); box-sizing: border-box; padding: 56px 16px 16px; background: #ecf1f4; overflow: auto; }
   .assistant-controls { position: absolute; z-index: 3; inset-block-start: 0; inset-inline: 0; display: flex; align-items: center; gap: 12px; box-sizing: border-box; block-size: 40px; padding: 4px 16px; border-block-end: 1px solid rgba(0,65,102,.2); background: #fff; }
   .assistant-mini-tools { display: flex; gap: 4px; }
@@ -64,62 +65,184 @@
   .toolbar { display: flex; gap: 4px; padding: 4px; background: #fff; border: 1px solid rgba(0,65,102,.2); border-radius: 6px; box-shadow: 0 2px 1px rgba(0,32,51,.02), 0 2px 4px rgba(0,32,51,.16); }
   .tool { flex: 0 0 auto; }
   .tool-icon { display: block; inline-size: 12px; block-size: 12px; background: currentColor; mask: var(--tool-icon) center / contain no-repeat; }
-  .object-card { position: absolute; z-index: 4; inset-block: 54px 12px; inset-inline-start: 12px; inline-size: 460px; box-sizing: border-box; display: flex; flex-direction: column; padding: 20px 16px 0; border: 1px solid rgba(0,65,102,.2); border-radius: 8px; background: #fff; box-shadow: 0 4px 8px rgba(0,32,51,.16); overflow: hidden; }
-  .card-heading { display: flex; flex: 0 0 auto; align-items: center; justify-content: space-between; min-block-size: 24px; box-sizing: border-box; margin: 0 0 16px; }
+  .object-card { position: absolute; z-index: 4; inset-block: 54px 12px; inset-inline-start: 12px; inline-size: 460px; box-sizing: border-box; display: flex; flex-direction: column; padding: 16px 16px 0; border: 1px solid rgba(0,65,102,.2); border-radius: 8px; background: #fff; box-shadow: 0 4px 8px rgba(0,32,51,.16); overflow: visible; }
+  .card-heading { display: flex; flex: 0 0 auto; align-items: center; justify-content: space-between; min-block-size: 24px; box-sizing: border-box; margin: 0 0 6px; }
   .page-comments-card { padding: 0; box-shadow: 0 4px 4px rgba(0,32,51,.04), 0 8px 24px rgba(0,32,51,.12); }
-  .page-comments-heading { min-block-size: 60px; margin: 0; padding: 20px 16px 16px; }
+  .page-comments-heading { min-block-size: 56px; margin: 0; padding: 16px; gap: 12px; }
   .page-comments-heading h2 { margin: 0; }
   .assistant-object-card { padding-block-end: 0; }
   .assistant-object-comments { margin-block-start: 0; }
-  .page-comments-list { --scrollbar-thumb: rgba(0,32,51,.3); --scrollbar-track: transparent; flex: 1 1 auto; min-block-size: 0; overflow-y: auto; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); scrollbar-width: thin; overscroll-behavior: contain; }
+  .page-comment-type-switch, .page-task-filter { display: inline-flex; align-items: center; gap: 6px; min-inline-size: 0; }
+  .page-comment-type-switch { flex: 1 1 auto; }
+  .page-task-filter { padding: 0 16px 10px; border-block-end: 1px solid rgba(0,65,102,.12); background: #fff; overflow-x: auto; scrollbar-width: none; }
+  .page-task-filter::-webkit-scrollbar { display: none; }
+  .page-comment-type-switch button, .page-task-filter button { min-block-size: 24px; padding: 3px 7px; border: 0; border-radius: 6px; background: transparent; color: #6f8795; font: inherit; font-size: 12px; line-height: 16px; white-space: nowrap; cursor: pointer; transition: background-color .12s ease, color .12s ease; }
+  .page-comment-type-switch button:hover, .page-comment-type-switch button:focus-visible, .page-task-filter button:hover, .page-task-filter button:focus-visible { background: #edf3f6; color: #002033; outline: 0; }
+  .page-comment-type-switch button.is-active, .page-task-filter button.is-active { background: #edf3f6; color: #002033; font-weight: 500; }
+  .page-comments-list { --scrollbar-thumb: rgba(40,105,133,.28); --scrollbar-track: transparent; flex: 1 1 auto; min-block-size: 0; overflow-y: auto; scrollbar-color: var(--scrollbar-thumb) transparent; scrollbar-width: thin; overscroll-behavior: contain; background: transparent; }
   .comment-group-heading { display: flex; align-items: center; justify-content: space-between; min-block-size: 32px; box-sizing: border-box; padding: 4px 16px; background: #ecf1f4; }
   .page-comment-items { display: flex; flex-direction: column; }
+  .comments-empty { box-sizing: border-box; padding: 18px 12px; color: rgba(0,32,51,.46); font-size: 12px; line-height: 16px; text-align: center; }
+  .page-comments-empty { padding: 28px 16px; }
   .page-comment { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; padding: 12px 16px; font-size: 12px; }
+  .page-comment + .page-comment { border-block-start: 1px solid rgba(0,65,102,.1); }
   .page-comment :where(strong, small, p, span, button, textarea) { font-size: 12px; }
   .page-comment-content { min-inline-size: 0; }
-  .page-comment-author { display: flex; align-items: center; gap: 6px; min-inline-size: 0; }
+  .page-comment-author { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 6px; min-inline-size: 0; }
   .page-comment-author i { flex: 0 0 auto; inline-size: 6px; block-size: 6px; border-radius: 50%; background: #0ba5ff; }
-  .page-comment-author strong { min-inline-size: 0; flex: 1 1 auto; overflow: hidden; font-size: 12px; line-height: 1.5; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+  .page-comment-author strong { min-inline-size: 0; overflow: hidden; font-size: 12px; line-height: 1.5; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+  .page-comment-author small { justify-self: end; color: rgba(0,32,51,.48); }
   .page-comment-menu { flex: 0 0 auto; margin-block: -7px; margin-inline-end: -8px; }
   .page-comment small { display: block; overflow: hidden; color: rgba(0,32,51,.6); font-size: 12px; line-height: 1.5; text-overflow: ellipsis; white-space: nowrap; }
   .page-comment-reply-reference { display: flex; align-items: center; gap: 4px; min-inline-size: 0; margin-block-start: 3px; color: #286985; font-size: 12px; line-height: 1.5; }
   .page-comment-reply-reference svg { flex: 0 0 auto; }
   .page-comment-reply-reference span { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-wrap: nowrap; }
+  .page-comment.is-task { position: relative; }
+  .page-comment.is-related-task::before { content: ""; position: absolute; inset-block: 12px; inset-inline-start: 0; inline-size: 4px; border-radius: 0 3px 3px 0; background: #0078d2; }
+
+  .page-comment.is-task { position: relative; }
+  .page-comment.is-task::before { content: ""; position: absolute; inset-block: 12px; inset-inline-start: 0; inline-size: 4px; border-radius: 0 3px 3px 0; background: #8093a0; }
+  .page-comment.is-task.status-new::before { background: #0b9fe8; }
+  .page-comment.is-task.status-progress::before { background: #f38b00; }
+  .page-comment.is-task.status-closed::before { background: #22c38e; }
+  .page-comment-task { display: block; margin-block-start: 8px; }
+  .page-comment-task-details { display: flex; align-items: center; gap: 10px; min-inline-size: 0; color: #286985; font-size: 12px; line-height: 18px; }
+  .page-comment-task-details > span:first-child { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .page-comment-task-details strong { color: #002033; font-weight: 600; }
+  .page-comment-task-details > .status-tooltip { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; min-block-size: 24px; padding: 2px 8px; border: 0; border-radius: 999px; background: #e6f2ff; color: #0078d2; font: inherit; cursor: default; }
+  .page-comment-task-details > button.status-tooltip { cursor: pointer; }
+  .page-comment-task.status-progress .page-comment-task-details > .status-tooltip { background: #fff1db; color: #b85f00; }
+  .page-comment-task.status-closed .page-comment-task-details > .status-tooltip { background: #e3f7ef; color: #007d5f; }
+  .page-comment-task > p { margin-block-start: 8px; }
+  .page-comment-task { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 8px; margin-block-start: 4px; color: #286985; font-size: 12px; line-height: 18px; }
+  .page-comment-task p { min-inline-size: 0; margin: 0; color: #002033; }
+  .page-comment-task strong { color: #002033; font-weight: 600; }
+  .page-comment-task > span:last-child, .page-comment-task > button:last-child { display: inline-flex; align-items: center; gap: 4px; min-block-size: 20px; padding: 1px 8px; border: 0; border-radius: 999px; background: #e6f2ff; color: #0078d2; font: inherit; cursor: default; }
+  .page-comment-task > button:last-child { cursor: pointer; }
+  .page-comment-task > button:last-child:hover, .page-comment-task > button:last-child:focus-visible { filter: brightness(.97); outline: 0; }
+  .page-comment-task.status-progress > span:last-child, .page-comment-task.status-progress > button:last-child { background: #fff1db; color: #b85f00; }
+  .page-comment-task.status-closed > span:last-child, .page-comment-task.status-closed > button:last-child { background: #e3f7ef; color: #007d5f; }
   .page-comment p { margin: 2px 0 0; color: #002033; font-size: 12px; line-height: 1.5; }
+  .comment-action-line { display: block; margin-block-start: 4px; color: rgba(0,32,51,.58); }
   .page-comment-inline-form { display: flex; flex-direction: column; gap: 8px; margin-block-start: 8px; }
   .page-comment-inline-form textarea { min-block-size: 64px; padding: 8px; border: 1px solid rgba(0,66,105,.28); border-radius: 4px; background: #fff; }
   .page-comment-inline-form textarea:focus { border-color: #0078d2; box-shadow: 0 0 0 1px #0078d2; }
   .page-comment-inline-actions { display: flex; justify-content: flex-end; gap: 8px; }
-  .badges { display: flex; gap: 4px; margin-block-end: 12px; }
-  .badges span { padding: 3px 5px; border-radius: 4px; background: #45b6e8; color: #fff; font-size: 10px; font-weight: 600; }
+  .task-status-comment-form { display: flex; flex-direction: column; gap: 6px; margin-block-start: 8px; padding: 8px; border-radius: 8px; background: #f7f9fb; }
+  .task-status-comment-form textarea { min-block-size: 60px; padding: 8px; border: 1px solid rgba(0,66,105,.2); border-radius: 6px; background: #fff; resize: vertical; }
+  .task-status-comment-actions { display: flex; align-items: center; gap: 8px; }
+  .task-status-comment-actions > .Button { flex: 0 0 auto; }
+  .task-status-comment-actions .page-comment-inline-actions { margin-inline-start: auto; }
+  .badges { display: flex; flex: 0 0 auto; gap: 4px; margin-block-end: 0; }
+  .badges span { padding: 2px 5px; border-radius: 4px; background: #e6f2f8; color: #286985; font-size: 10px; font-weight: 500; }
   .badges span:not(:first-child) { background: #22c38e; }
-  .object-card h1 { margin: 0 0 18px; font-size: 16px; line-height: 1.5; font-weight: 400; }
-  .sidebar-tabs { margin-block-start: 18px; }
+  .object-card-title { display: block; min-inline-size: 0; min-block-size: 24px; margin-block: 2px 6px; overflow-x: hidden; overflow-y: visible; color: #002033; font-size: 16px !important; line-height: 24px !important; text-overflow: ellipsis; white-space: nowrap; }
+  .object-card-heading { gap: 8px; margin-block-end: 4px; }
+  .object-card-actions { display: flex; align-items: center; justify-content: flex-end; flex: 1 1 auto; gap: 4px; min-inline-size: 0; }
+  .object-card-actions .Button { inline-size: 24px; min-inline-size: 24px; block-size: 24px; min-block-size: 24px; color: #286985; }
+  .object-card-actions .Button:hover, .object-card-actions .Button:focus-visible, .sidebar-icon-button:hover, .sidebar-icon-button:focus-visible { background: #edf3f6 !important; }
+  .sidebar-tabs { flex: 0 0 auto; margin-block-start: 0; }
+  .sidebar-tabs :where(button, .Text, span) { font-size: 12px !important; line-height: 16px !important; }
   .sidebar-tabs b { padding: 3px 5px; border-radius: 4px; background: #dee4e8; color: rgba(0,32,51,.6); font-size: 10px; font-weight: 400; }
+  .variant-two-object-card .composer-mode-switch { display: none; }
+  .variant-two-object-card .sidebar-tabs { margin-inline: -8px; }
+  .variant-two-object-card .sidebar-tabs :where(button, [role=tab]) { min-inline-size: 0; padding-inline: 6px !important; white-space: nowrap; }
+  .variant-two-object-card .sidebar-tabs b { padding-inline: 4px; }
   .sidebar-icon-button { flex: 0 0 auto; }
-  textarea { box-sizing: border-box; inline-size: 100%; min-block-size: 76px; resize: vertical; padding: 10px 12px; border: 0; background: transparent; color: #002033; font-size: 12px; outline: 0; }
+  textarea { box-sizing: border-box; inline-size: 100%; min-block-size: 76px; resize: none; padding: 10px 12px; border: 0; background: transparent; color: #002033; font-size: 12px; outline: 0; }
   textarea::placeholder { color: rgba(0,32,51,.35); }
-  .comment-form { flex: 0 0 auto; }
-  .composer { margin-block: 16px 12px; overflow: hidden; border: 1px solid rgba(0,66,105,.28); border-radius: 8px; background: #fff; transition: border-color .15s ease, box-shadow .15s ease; }
-  .composer:focus-within { border-color: #0078d2; box-shadow: 0 0 0 1px #0078d2; }
-  .composer-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-block-size: 42px; padding: 6px 8px; border-block-start: 1px solid rgba(0,65,102,.16); }
-  .attach-button { flex: 0 0 auto; }
+  .comment-form { position: sticky; z-index: 3; inset-block-end: 0; order: 3; flex: 0 0 auto; block-size: var(--composer-height, 124px); min-block-size: 112px; max-block-size: min(360px, 68%); box-sizing: border-box; margin-inline: -16px; padding: 16px; overflow: hidden; border: 1px solid #d6e0e7; border-inline-width: 0; border-block-end: 0; border-radius: 8px 8px 0 0; background: #fff; box-shadow: 0 -6px 14px rgba(0,32,51,.06); }
+  .comment-form-resizer { position: absolute; inset-block-start: -5px; inset-inline: 0; block-size: 10px; cursor: ns-resize; touch-action: none; }
+  .comment-form-resizer::after { content: ""; position: absolute; inset-block-start: 3px; inset-inline-start: 50%; inline-size: 36px; block-size: 3px; border-radius: 999px; background: rgba(0,65,102,.18); translate: -50% 0; opacity: 0; transition: opacity .12s ease, background-color .12s ease; }
+  .comment-form:hover .comment-form-resizer::after, .comment-form-resizer:focus-visible::after { opacity: 1; }
+  .comment-form-resizer:hover::after { background: rgba(0,120,210,.42); }
+  .composer { display: flex; flex-direction: column; block-size: 100%; margin-block: 0; overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.composer-mode-switch { position: static; z-index: 1; display: flex; align-items: center; gap: 4px; min-block-size: 28px; box-sizing: border-box; padding: 0 0 8px; border-radius: 0; border-block-end: 1px solid #d6e0e7; background: transparent; }
+.composer-mode-switch button { position: relative; min-block-size: 24px; min-inline-size: auto; padding: 3px 8px; border: 0; border-radius: 4px; background: transparent; color: #6f8795; font-size: 12px; line-height: 16px; cursor: pointer; transition: background-color .12s ease, color .12s ease; }
+.composer-mode-switch button:hover, .composer-mode-switch button:focus-visible { background: #edf3f6; color: #002033; }
+.composer-mode-switch button.is-active { background: #edf3f6; color: #002033; font-weight: 500; box-shadow: none; }
+.composer-mode-switch .composer-reset { margin-inline-start: auto; color: #286985; }
+.composer-input { position: relative; display: flex; flex-direction: column; block-size: 100%; min-block-size: 80px; overflow: hidden; border: 0; border-radius: 0; background: #fff; box-shadow: none; }
+.comment-form:focus-within { border-color: #d6e0e7; box-shadow: 0 -6px 14px rgba(0,32,51,.06); }
+.composer textarea { flex: 1 1 auto; block-size: auto; min-block-size: 34px; margin: 0; padding: 8px 0 34px; border: 0; border-radius: 0; background: #fff; color: #002033; font-size: 12px; line-height: 16px; resize: none; }
+.composer textarea::placeholder { color: #a7b5be; }
+.composer textarea:focus { box-shadow: none; }
+.task-select { display: flex; align-items: center; gap: 8px; min-inline-size: 0; min-block-size: 34px; padding: 0 10px; border: 0; border-inline-start: 1px solid #d6e0e7; background: transparent; color: #002033; font: inherit; font-size: 12px; line-height: 16px; text-align: left; cursor: pointer; }
+.task-select.is-empty { color: #8da0aa; }
+.task-select i { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 20px; inline-size: 20px; block-size: 20px; border-radius: 50%; background: #864dd5; color: #fff; font-size: 10px; font-style: normal; font-weight: 700; }
+.task-select span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.task-select svg { flex: 0 0 auto; margin-inline-start: auto; color: #6f8795; }
+.composer-toolbar { position: absolute; inset-inline: 0; inset-block-end: 0; display: flex; align-items: center; gap: 6px; block-size: 24px; padding: 0; border-block-start: 0; }
+.attach-button, .send-button { flex: 0 0 24px; inline-size: 24px; min-inline-size: 24px; block-size: 24px; min-block-size: 24px; padding: 0 !important; border-radius: 6px !important; }
+.attach-button { background: transparent !important; color: #286985 !important; }
+.attach-button:hover, .attach-button:focus-visible, .toolbar-assignee:hover, .toolbar-assignee:focus-visible { background: #edf3f6 !important; }
+.attach-button svg, .send-button svg { inline-size: 16px; block-size: 16px; }
+.send-button { margin-inline-start: auto; }
+.send-button:disabled { background: #edf3f6 !important; color: #a7b5be !important; }
+.toolbar-assignee { display: inline-flex; align-items: center; gap: 6px; min-inline-size: 0; max-inline-size: min(260px, calc(100% - 68px)); block-size: 24px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent; color: #286985; font-size: 12px; line-height: 16px; cursor: pointer; transition: background-color .12s ease, color .12s ease; }
+.toolbar-assignee.is-empty { color: #286985; }
+.composer-input.is-task .toolbar-assignee.is-empty { color: #df3f3f; }
+.toolbar-assignee i { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 18px; inline-size: 18px; block-size: 18px; border-radius: 50%; background: #864dd5; color: #fff; font-size: 9px; font-style: normal; font-weight: 700; }
+.toolbar-assignee span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.toolbar-assignee b { color: #df3f3f; font-weight: 700; }
+.toolbar-assignee svg { flex: 0 0 auto; }
+.toolbar-assignee svg:last-child { margin-inline-start: auto; color: #286985; }
+.recipient-context-menu { z-index: 30; }
+.composer-input:has(.composer-attachments) { min-block-size: 0; }
+.composer-input:has(.composer-attachments) textarea { min-block-size: 0; padding-block-end: 102px; }
+.composer-attachments { position: absolute; inset-inline: 0; inset-block-end: 44px; display: flex; flex-wrap: wrap; gap: 8px; max-inline-size: 100%; margin: 0; padding: 0; list-style: none; }
+.composer-attachment { display: inline-grid; grid-template-columns: 30px minmax(0, 1fr) 22px; align-items: center; gap: 8px; flex: 1 1 198px; min-inline-size: 0; max-inline-size: 238px; block-size: 48px; box-sizing: border-box; padding: 6px; border: 1px solid rgba(0,65,102,.16); border-radius: 8px; background: #fff; color: #286985; box-shadow: 0 1px 2px rgba(0,32,51,.04); transition: border-color .12s ease, background-color .12s ease, box-shadow .12s ease; }
+.composer-attachment:hover, .composer-attachment:focus-within { border-color: rgba(0,65,102,.22); background: #f4f6f8; box-shadow: 0 1px 4px rgba(0,32,51,.08); }
+.composer-file-preview, .composer-file-type { display: inline-flex; align-items: center; justify-content: center; inline-size: 30px; block-size: 30px; border-radius: 6px; background: #edf6fd; color: #0078d2; overflow: hidden; }
+.composer-file-preview img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+.composer-file-type { border: 1px solid rgba(0,120,210,.14); font-size: 8px; line-height: 10px; font-weight: 700; letter-spacing: 0; }
+.composer-file-details { min-inline-size: 0; display: flex; flex-direction: column; justify-content: center; gap: 1px; }
+.composer-attachment strong { overflow: hidden; color: #002033; font-size: 11px; font-weight: 600; line-height: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.composer-attachment small { overflow: hidden; color: rgba(0,32,51,.55); font-size: 10px; line-height: 12px; text-overflow: ellipsis; white-space: nowrap; text-transform: uppercase; }
+.composer-attachment-remove { flex: 0 0 22px; inline-size: 22px; min-inline-size: 22px; block-size: 22px; min-block-size: 22px; padding: 0 !important; border-radius: 6px !important; color: #6f8795 !important; }
+.composer-attachment-remove:hover, .composer-attachment-remove:focus-visible { background: #edf3f6 !important; color: #002033 !important; }
+.composer-attachment-more { display: inline-flex; align-items: center; justify-content: center; flex: 1 1 150px; max-inline-size: 238px; block-size: 48px; box-sizing: border-box; padding: 4px 10px; border: 1px dashed rgba(0,120,210,.28); border-radius: 8px; background: #fff; color: #0078d2; font-size: 12px; line-height: 16px; }
+.attachment-caption { margin-block: 0 -4px; }
   .attachment-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0 12px 12px; list-style: none; }
   .attachment-list li { position: relative; display: flex; align-items: center; gap: 8px; min-inline-size: 0; border: 1px solid rgba(0,65,102,.16); border-radius: 8px; background: #f4f7f8; }
   .attachment-list .image-attachment { inline-size: 88px; block-size: 72px; overflow: visible; }
   .attachment-list .image-attachment img { inline-size: 100%; block-size: 100%; border-radius: 7px; object-fit: cover; }
   .attachment-list .file-attachment { max-inline-size: 220px; padding: 8px 32px 8px 9px; }
-  .attachment-list .file-icon, .comment-attachments > li > span:first-child { flex: 0 0 auto; color: #0078d2; font-size: 14px; }
-  .file-details, .comment-attachments li > span:last-child { min-inline-size: 0; flex: 1 1 auto; }
-  .attachment-list strong, .comment-attachments strong { display: block; overflow: hidden; color: #002033; font-size: 11px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
-  .attachment-list small, .comment-attachments small { color: rgba(0,32,51,.55); font-size: 10px; }
+  .attachment-list .file-icon { flex: 0 0 auto; color: #0078d2; font-size: 14px; }
+  .file-details { min-inline-size: 0; flex: 1 1 auto; }
+  .attachment-list strong { display: block; overflow: hidden; color: #002033; font-size: 11px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+  .attachment-list small { color: rgba(0,32,51,.55); font-size: 10px; }
   .attachment-list .attachment-remove { position: absolute; inset-block-start: -8px; inset-inline-end: -8px; border: 2px solid #fff; border-radius: 50%; background: #002033; color: #fff; }
   .attachment-list .attachment-remove:hover { background: #df3f3f; }
-  .comment-attachments { display: flex; flex-direction: column; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; }
-  .comment-attachments li { display: flex; align-items: center; gap: 8px; min-inline-size: 0; padding: 7px 8px; border: 1px solid rgba(0,65,102,.16); border-radius: 4px; background: #f4f7f8; }
-  .comments { --scrollbar-thumb: rgba(0,32,51,.3); --scrollbar-track: rgba(0,32,51,.06); flex: 1 1 auto; min-block-size: 0; overflow-y: auto; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track); scrollbar-width: thin; scrollbar-gutter: stable; overscroll-behavior: contain; padding-inline-end: 4px; }
-  .comment { position: relative; display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 12px; margin-block-end: 14px; font-size: 12px; }
+  .comment-attachments { display: flex; flex-direction: column; gap: 4px; inline-size: min(100%, 236px); margin: 6px 0 0; padding: 0; list-style: none; }
+  .comment-attachments li { position: relative; display: grid; grid-template-columns: 34px minmax(0,1fr); align-items: center; gap: 8px; min-inline-size: 0; min-block-size: 42px; box-sizing: border-box; padding: 4px 7px 4px 4px; border: 1px solid rgba(0,65,102,.14); border-radius: 8px; background: #fff; box-shadow: 0 1px 2px rgba(0,32,51,.04); }
+  .comment-attachments li:hover { background: #f4f6f8; border-color: rgba(0,65,102,.2); }
+  .comment-attachment-download { position: absolute; inset-inline-end: 6px; display: grid; place-items: center; inline-size: 24px; block-size: 24px; border-radius: 4px; background: #fff; color: #286985; opacity: 0; pointer-events: none; transition: opacity .16s ease, background-color .16s ease; }
+  .comment-attachments li:hover .comment-attachment-download, .comment-attachment-download:focus-visible { opacity: 1; pointer-events: auto; }
+  .comment-attachment-download:hover { background: #eaf1f4; }
+  .comment-attachment-preview { display: block; inline-size: 34px; block-size: 34px; padding: 0; border: 0; border-radius: 6px; overflow: hidden; background: #eef4f7; cursor: zoom-in; }
+  .comment-attachment-preview img { display: block; inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .image-lightbox { position: fixed; z-index: 2000; inset: 0; display: grid; place-items: center; padding: 24px; background: rgba(0,20,32,.78); cursor: zoom-out; }
+  .image-lightbox-content { position: relative; display: grid; justify-items: center; gap: 8px; max-inline-size: min(100%, 1200px); max-block-size: 100%; color: #fff; cursor: default; }
+  .image-lightbox-content img { display: block; max-inline-size: 100%; max-block-size: calc(100dvh - 72px); object-fit: contain; border-radius: 4px; box-shadow: 0 12px 36px rgba(0,0,0,.35); }
+  .image-lightbox-content span { max-inline-size: 100%; overflow: hidden; color: rgba(255,255,255,.82); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+  .image-lightbox-close { position: absolute; z-index: 1; inset-block-start: -12px; inset-inline-end: -12px; display: grid; place-items: center; inline-size: 32px; block-size: 32px; padding: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; background: rgba(0,32,51,.75); color: #fff; cursor: pointer; font-size: 22px; line-height: 1; }
+  .image-lightbox-close:hover { background: rgba(0,32,51,.95); }
+  .comment-attachment-preview, .comment-attachment-type { display: inline-flex; align-items: center; justify-content: center; inline-size: 34px; block-size: 34px; border-radius: 7px; overflow: hidden; background: #edf6fd; color: #0078d2; font-size: 8px; line-height: 10px; font-weight: 700; text-transform: uppercase; }
+  .comment-attachment-preview img { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .comment-attachment-info { min-inline-size: 0; }
+  .comment-attachment-info strong { display: block; overflow: hidden; color: #002033; font-size: 11px; font-weight: 600; line-height: 14px; text-overflow: ellipsis; white-space: nowrap; }
+  .comment-attachment-info small { display: block; overflow: hidden; color: rgba(0,32,51,.55); font-size: 10px; line-height: 12px; text-overflow: ellipsis; white-space: nowrap; text-transform: uppercase; }
+  .comment-filter { order: 1; display: inline-flex; align-items: center; align-self: flex-start; gap: 6px; min-block-size: 32px; box-sizing: border-box; margin-block: 8px 6px; padding: 0; border-radius: 0; background: transparent; }
+  .comment-filter button { min-block-size: 24px; padding: 3px 8px; border: 0; border-radius: 4px; background: transparent; color: #6f8795; font: inherit; font-size: 12px; line-height: 16px; white-space: nowrap; cursor: pointer; transition: background-color .12s ease, color .12s ease; }
+  .comment-filter button:hover, .comment-filter button:focus-visible { background: #edf3f6; color: #002033; outline: 0; }
+  .comment-filter button.is-active { background: #edf3f6; color: #002033; font-weight: 500; box-shadow: none; }
+  .comments { order: 2; --scrollbar-thumb: rgba(40,105,133,.28); --scrollbar-track: transparent; flex: 1 1 auto; min-block-size: 0; margin-inline: -16px -16px; overflow-y: auto; scrollbar-color: var(--scrollbar-thumb) transparent; scrollbar-width: thin; scrollbar-gutter: stable; overscroll-behavior: contain; padding: 2px 16px 12px; background: transparent; }
+  .object-card :where(.page-comments-list, .comment-form) { scrollbar-color: rgba(40,105,133,.26) transparent; scrollbar-width: thin; }
+  .comment { position: relative; display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 10px; margin-block-end: 0; padding-block: 10px; font-size: 12px; }
   .comment :where(strong, small, p, span, button, textarea) { font-size: 12px; }
+  .comment + .comment::before { content: ""; position: absolute; inset-block-start: 0; inset-inline-start: 34px; inset-inline-end: 0; block-size: 1px; background: rgba(0,65,102,.12); }
+  .comment-meta { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .comment.is-highlighted { margin-inline: -8px 0; padding: 8px; border-radius: 6px; animation: comment-highlight-fade 3s ease-out forwards; }
   .comment.is-reply { margin-inline-start: 32px; }
   .avatar { display: grid; place-items: center; inline-size: 24px; block-size: 24px; border-radius: 50%; background: #286985; color: #fff; font-size: 8px; font-weight: 600; }
@@ -130,11 +253,28 @@
   .avatar.tone-4 { background: #008f79; }
   .avatar.tone-5 { background: #8a6500; }
   .comment-content { min-inline-size: 0; }
-  .comment-title { display: flex; align-items: center; justify-content: space-between; }
-  .comment-title strong { overflow: hidden; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+  .comment-title { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .comment-title strong { min-inline-size: 0; overflow: hidden; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
   .comment-menu { flex: 0 0 auto; }
-  .comment small { display: block; color: rgba(0,32,51,.55); font-size: 12px; line-height: 1.5; }
-  .comment p { margin: 4px 0 0; font-size: 12px; line-height: 1.5; }
+  .comment small { display: block; color: rgba(0,32,51,.48); font-size: 12px; line-height: 16px; }
+  .comment-meta-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px; }
+  .comment-meta-row small:last-child { white-space: nowrap; }
+  .comment-recipient { color: #286985 !important; }
+  .comment p { margin: 4px 0 0; font-size: 12px; line-height: 18px; }
+  .comment.is-related-task::after { content: ""; position: absolute; z-index: 1; inset-block: 10px; inset-inline-start: -16px; inline-size: 4px; border-radius: 0 3px 3px 0; background: #0078d2; }
+  .comment-task-card { margin-block-start: 4px; }
+  .comment-task-meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 8px; color: #286985; font-size: 12px; line-height: 18px; }
+  .comment-task-meta p { min-inline-size: 0; margin: 0; color: #002033; }
+  .comment-task-meta strong { color: #002033; font-weight: 600; }
+  .task-status-badge { display: inline-flex; align-items: center; gap: 4px; min-block-size: 22px; padding: 2px 8px; border: 0; border-radius: 999px; font: inherit; font-size: 12px; line-height: 16px; cursor: pointer; }
+  .task-status-badge.status-new { background: #e6f2ff; color: #0078d2; }
+  .task-status-badge.status-progress { background: #fff1db; color: #b85f00; }
+  .task-status-badge.status-closed { background: #e3f7ef; color: #007d5f; }
+  .task-status-badge:hover, .task-status-badge:focus-visible { filter: brightness(.97); }
+  .status-tooltip { position: relative; }
+  .status-tooltip::after { content: attr(data-tooltip); position: absolute; z-index: 40; inset-block-end: calc(100% + 6px); inset-inline-start: 50%; inline-size: max-content; max-inline-size: 180px; padding: 4px 7px; border-radius: 4px; background: #1f2d35; color: #fff; font-size: 10px; line-height: 14px; font-weight: 400; white-space: nowrap; pointer-events: none; opacity: 0; transform: translate(-50%, 2px); transition: opacity .12s ease, transform .12s ease; box-shadow: 0 4px 10px rgba(0,32,51,.18); }
+  .status-tooltip::before { content: ""; position: absolute; z-index: 40; inset-block-end: calc(100% + 2px); inset-inline-start: 50%; inline-size: 7px; block-size: 7px; background: #1f2d35; opacity: 0; pointer-events: none; transform: translate(-50%, 2px) rotate(45deg); transition: opacity .12s ease, transform .12s ease; }
+  .status-tooltip:hover::after, .status-tooltip:focus-visible::after, .status-tooltip:hover::before, .status-tooltip:focus-visible::before { opacity: 1; transform: translate(-50%, 0); }
   .comment-edit-form { display: flex; flex-direction: column; gap: 8px; margin-block-start: 8px; }
   .comment-edit-toolbar { display: flex; align-items: center; gap: 8px; }
   .comment-edit-actions { display: flex; align-items: center; gap: 8px; }
@@ -149,26 +289,33 @@
   .thread-reply-form textarea { min-block-size: 64px; padding: 8px; border: 1px solid rgba(0,66,105,.28); border-radius: 4px; background: #fff; }
   .thread-reply-form textarea:focus { border-color: #0078d2; box-shadow: 0 0 0 1px #0078d2; }
   .thread-reply-actions { display: flex; justify-content: flex-end; gap: 8px; }
-  .reply-link { grid-column: 1 / -1; justify-self: start; }
-  .comment-context-menu { z-index: 20; min-inline-size: 150px; }
+  .reply-link { grid-column: 2; justify-self: start; margin-block-start: -2px; }
+  .comment-context-menu { z-index: 100; inline-size: 190px !important; min-inline-size: 190px !important; max-inline-size: 190px !important; block-size: auto !important; }
+  .comment-context-menu :where(ul, [role=menu]) { inline-size: 100% !important; min-inline-size: 0 !important; max-inline-size: 100% !important; box-sizing: border-box; }
+  .comment-context-menu :where(li, [role=menuitem]) { min-inline-size: 0; white-space: nowrap; }
   .empty-tab { padding-block: 32px; }
-  .scheme { position: absolute; inset: 0; }
+  .scheme { position: absolute; inset: 0; overflow: hidden; background: #dce5e8 url('/assets/well-map-background.png') center / cover no-repeat; }
   .well { --well-color: #20c997; --well-icon-width: 46px; --well-icon-height: 52px; --well-icon-bottom: 18px; position: absolute; inset-inline-start: var(--x); inset-block-start: var(--y); z-index: 1; inline-size: 90px; block-size: 90px; translate: -50% -50%; }
   .well.selected { --well-icon-width: 56px; --well-icon-height: 70px; }
   .well-target { position: relative; inline-size: 90px; block-size: 90px; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; }
-  .comment-marker { position: absolute; z-index: 2; inset-inline-start: 50%; inset-block-end: calc(var(--well-icon-bottom) + var(--well-icon-height) + 9px); translate: -50% 0; scale: 1; transform: translateY(0); display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-inline-size: 44px; min-block-size: 28px; padding: 0 6px; border: 0; border-radius: 12px; background: #163e52; box-shadow: 0 5px 14px rgba(0,32,51,.2); color: #fff; cursor: pointer; transition: inset-block-end .25s ease, background-color .18s ease, box-shadow .18s ease, scale .2s ease, transform .2s ease; }
+  .comment-marker { position: absolute; z-index: 2; inset-inline-start: 50%; inset-block-end: calc(var(--well-icon-bottom) + var(--well-icon-height) + 9px); translate: -50% 0; scale: 1; display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-inline-size: 44px; min-block-size: 28px; padding: 0 6px; border: 0; border-radius: 12px; background: #163e52; box-shadow: 0 5px 14px rgba(0,32,51,.2); color: #fff; cursor: pointer; transition: inset-block-end .25s ease, background-color .18s ease, box-shadow .18s ease, scale .2s ease, transform .2s ease; }
   .comment-marker::after { content: ''; position: absolute; inset-block-end: -4px; inset-inline-start: 50%; inline-size: 8px; block-size: 8px; border-radius: 1px; background: #163e52; rotate: 45deg; translate: -50% 0; }
-  .comment-marker svg { position: relative; z-index: 1; inline-size: 14px; block-size: 14px; fill: currentColor; }
-  .comment-marker span { position: relative; z-index: 1; font-size: 12px; line-height: 1; font-weight: 500; }
+  .comment-marker svg { position: relative; z-index: 1; display: block; flex: 0 0 14px; inline-size: 14px; block-size: 14px; fill: currentColor; }
+  .comment-marker span { position: relative; z-index: 1; display: block; flex: 0 0 auto; min-block-size: 14px; font-size: 12px; line-height: 14px; font-weight: 500; }
   .unread-indicator { display: none; }
   .comment-marker.has-unread .unread-indicator { position: absolute; z-index: 3; inset-block-start: -4px; inset-inline-end: -3px; display: block; inline-size: 8px; block-size: 8px; border: 2px solid #fff; border-radius: 50%; background: #0ba5ff; box-shadow: 0 1px 3px rgba(0,32,51,.22); }
   .comment-marker:hover { box-shadow: 0 5px 14px rgba(0,32,51,.2); }
   .comment-marker[aria-pressed=true] { background: #0078d2; box-shadow: 0 4px 12px rgba(0,120,210,.38); }
   .comment-marker[aria-pressed=true]::after { background: #0078d2; }
   .comment-marker[aria-pressed=true].has-unread .unread-indicator { border-color: #fff; }
-  .well-icon { position: absolute; inset-inline-start: 50%; inset-block-end: var(--well-icon-bottom); display: block; inline-size: var(--well-icon-width); block-size: var(--well-icon-height); translate: -50% 0; shape-rendering: geometricPrecision; transform: translateY(0); transform-origin: bottom center; filter: drop-shadow(0 4px 2px rgba(0,32,51,.04)) drop-shadow(0 8px 12px rgba(0,32,51,.12)); transition: inline-size .25s ease, block-size .25s ease, filter .25s ease; pointer-events: none; }
+  .well-icon { position: absolute; inset-inline-start: 50%; inset-block-end: var(--well-icon-bottom); display: block; inline-size: var(--well-icon-width); block-size: var(--well-icon-height); translate: -50% 0; shape-rendering: geometricPrecision; transform-origin: bottom center; filter: drop-shadow(0 4px 2px rgba(0,32,51,.04)) drop-shadow(0 8px 12px rgba(0,32,51,.12)); transition: inline-size .25s ease, block-size .25s ease, filter .25s ease; pointer-events: none; }
   .well.selected .well-icon { filter: drop-shadow(0 0 8px rgba(0,120,210,.55)) drop-shadow(0 4.606px 2.303px rgba(0,32,51,.04)) drop-shadow(0 9.212px 13.818px rgba(0,32,51,.18)); }
-  .well-label { position: absolute; inset-inline: 0; inset-block-end: 0; display: block; inline-size: 100%; box-sizing: border-box; padding: 2px 4px; overflow: hidden; color: #002033; font-size: 10px; line-height: 12px; font-weight: 700; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+  .well-target:hover, .well-target:focus-visible { background: transparent; box-shadow: none; }
+  .well.selected:hover .well-icon, .well.selected .well-target:hover .well-icon { filter: drop-shadow(0 0 8px rgba(0,120,210,.55)) drop-shadow(0 4.606px 2.303px rgba(0,32,51,.04)) drop-shadow(0 9.212px 13.818px rgba(0,32,51,.18)); }
+  .well.selected:hover .well-icon { animation: pin-bounce .8s ease-out both; }
+  .well.selected:hover .comment-marker { animation: pin-bounce .8s ease-out both; }
+  .well.selected:has(.comment-marker:hover) .well-icon { animation: pin-bounce .8s ease-out both; }
+  .well-label { position: absolute; left: 0; right: 0; inset-block-end: 0; display: block; inline-size: 100%; box-sizing: border-box; padding: 2px 4px; overflow: hidden; color: #002033; font-size: 10px; line-height: 12px; font-weight: 700; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
   .inactive-pin:hover :is(.pin-head, .comment-marker) { animation: pin-bounce .8s ease-out both; }
   .comment-marker:hover { z-index: 4; scale: 1.06; transform: translateY(-3px); animation: none; box-shadow: 0 8px 18px rgba(0,32,51,.28); }
   .inactive-pin:has(.comment-marker:hover) .pin-head { animation: none; }
@@ -183,12 +330,10 @@
     .comment.is-highlighted { background: rgba(11,165,255,.12); box-shadow: inset 3px 0 #0ba5ff; }
   }
   @supports not (scrollbar-color: auto) {
-    .comments::-webkit-scrollbar { inline-size: 6px; }
-    .comments::-webkit-scrollbar-thumb { border-radius: 3px; background: var(--scrollbar-thumb); }
-    .comments::-webkit-scrollbar-track { background: var(--scrollbar-track); }
-    .page-comments-list::-webkit-scrollbar { inline-size: 6px; }
-    .page-comments-list::-webkit-scrollbar-thumb { border-radius: 3px; background: var(--scrollbar-thumb); }
-    .page-comments-list::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+    .object-card :where(.comments, .page-comments-list, .comment-form)::-webkit-scrollbar { inline-size: 3px; block-size: 3px; }
+    .object-card :where(.comments, .page-comments-list, .comment-form)::-webkit-scrollbar-thumb { border-radius: 999px; background: rgba(40,105,133,.24); }
+    .object-card :where(.comments, .page-comments-list, .comment-form)::-webkit-scrollbar-thumb:hover { background: rgba(40,105,133,.42); }
+    .object-card :where(.comments, .page-comments-list, .comment-form)::-webkit-scrollbar-track, .object-card :where(.comments, .page-comments-list, .comment-form)::-webkit-scrollbar-corner { background: transparent; }
   }
   @media (max-width: 1100px) {
     .workspace { min-height: calc(100dvh - 48px); }
@@ -201,3 +346,593 @@
     .sidebar-tabs { overflow-x: auto; }
   }
 }
+
+  .object-card:not(.variant-two-object-card) .comment.is-related-task::after { display: none; }
+  .variant-two-object-card .comment:has(.task-summary) { grid-template-columns: minmax(0, 1fr); margin-block: 8px; padding: 12px 12px 0; border: 1px solid rgba(0,65,102,.14); border-radius: 6px; background: #fff; box-shadow: 0 2px 7px rgba(0,32,51,.08); }
+  .variant-two-object-card .comment:has(.task-summary) > .avatar, .variant-two-object-card .comment:has(.task-summary) .comment-title, .variant-two-object-card .comment:has(.task-summary) .comment-meta-row { display: none; }
+  .variant-two-object-card .comment:has(.task-summary) + .comment::before { display: none; }
+  .variant-two-object-card .comment.is-related-task::after { inset-block: -1px; inset-inline-start: -1px; border-radius: 6px 0 0 6px; background: #0078d2; }
+  .variant-two-object-card .task-summary { min-inline-size: 0; margin: 0; }
+  .variant-two-object-card .task-card-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 8px; }
+  .variant-two-object-card .task-card-heading p { margin: 0; color: #002033; font-size: 13px; line-height: 18px; font-weight: 600; }
+  .variant-two-object-card .task-card-heading .comment-menu { margin-block-start: -7px; margin-inline-end: -8px; }
+  .variant-two-object-card .task-card-schedule { display: flex; align-items: center; gap: 10px; margin-block-start: 10px; }
+  .variant-two-object-card .task-card-schedule > span:first-child { display: inline-flex; align-items: center; gap: 6px; color: #6f8795; font-size: 12px; line-height: 18px; white-space: nowrap; }
+  .variant-two-object-card .task-card-schedule > span:first-child svg { color: #6f8795; }
+  .variant-two-object-card .task-card-parties { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; margin-block-start: 10px; padding-block: 10px; border-block-start: 1px solid rgba(0,65,102,.12); }
+  .variant-two-object-card .task-card-parties > span { min-inline-size: 0; }
+  .variant-two-object-card .task-card-parties small { color: rgba(0,32,51,.52); font-size: 11px; line-height: 14px; }
+  .variant-two-object-card .task-card-parties strong { display: block; overflow: hidden; margin-block-start: 2px; color: #002033; font-size: 12px; line-height: 16px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+  .variant-two-object-card .comment:has(.task-summary) > .task-history-link { grid-column: 1; inline-size: calc(100% + 24px); justify-content: flex-start; margin: 0 -12px; padding: 8px 12px; border-block-start: 1px solid rgba(0,65,102,.12); border-radius: 0; }
+
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary) .comment-title,
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary) .comment-meta-row { display: none; }
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary) .comment-content { min-inline-size: 0; }
+  .variant-one-task-summary { min-inline-size: 0; margin-block-start: 2px; }
+  .variant-one-task-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .variant-one-task-heading strong { min-inline-size: 0; overflow: hidden; color: #002033; font-size: 13px; line-height: 18px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+  .variant-one-task-heading .comment-menu { flex: 0 0 auto; margin-block: -7px; margin-inline-end: -8px; }
+  .variant-one-task-context { display: block; overflow: hidden; margin-block-start: 2px; color: #8496a2; font-size: 12px; line-height: 18px; text-overflow: ellipsis; white-space: nowrap; }
+  .variant-one-task-assignee { display: flex; align-items: center; gap: 10px; margin-block-start: 8px; color: #286985; font-size: 12px; line-height: 18px; }
+  .variant-one-task-assignee > span { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .variant-one-task-assignee strong { color: #002033; font-weight: 600; }
+  .variant-one-task-description { margin-block-start: 8px !important; color: #002033; font-size: 13px !important; line-height: 20px !important; }
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary) .reply-link { grid-column: 2; margin-block-start: 8px; color: #286985; }
+
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary) { position: relative; }
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary)::after { content: ""; position: absolute; z-index: 1; inset-block: 8px; inset-inline-start: 0; inline-size: 4px; border-radius: 0 3px 3px 0; background: #8093a0; }
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary.status-progress)::after { background: #f38b00; }
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary.status-closed)::after { background: #22c38e; }
+
+  .variant-two-object-card .comment-title .comment-time { flex: 0 0 auto; margin-inline-start: auto; color: rgba(0,32,51,.48); font-size: 12px; line-height: 16px; white-space: nowrap; }
+  .variant-two-object-card .comment-title strong { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .object-card:not(.variant-two-object-card) .comment:not(:has(.variant-one-task-summary)) .comment-meta-row { display: none; }
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary)::after { inset-block: 8px; inset-inline-start: -16px; border-radius: 0 3px 3px 0; }
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary.status-new)::after { background: #0b9fe8; }
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary.status-progress)::after { background: #f38b00; }
+  .object-card:not(.variant-two-object-card) .comment:has(.variant-one-task-summary.status-closed)::after { background: #22c38e; }
+  .variant-two-object-card .comment-time-below { display: block; margin-block-start: 2px; color: rgba(0,32,51,.48); font-size: 10px; line-height: 14px; white-space: nowrap; }
+
+  .page-comment-author { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .page-comment-author .page-comment-task-status { display: inline-flex; align-items: center; gap: 4px; justify-self: start; min-block-size: 24px; padding: 2px 8px; border: 0; border-radius: 999px; background: #e6f2ff; color: #0078d2; font: inherit; line-height: 18px; cursor: default; }
+  .page-comment-author .page-comment-task-status.status-progress { background: #fff1db; color: #b85f00; }
+  .page-comment-author .page-comment-task-status.status-closed { background: #e3f7ef; color: #007d5f; }
+  .page-comment-author button.page-comment-task-status { cursor: pointer; }
+  .page-comment-context { display: block; margin-block-start: 2px; color: #8496a2 !important; font-size: 12px !important; line-height: 18px !important; }
+  .variant-one-task-identity { display: flex; align-items: center; gap: 10px; min-inline-size: 0; }
+  .variant-one-task-identity .task-status-badge { flex: 0 0 auto; }
+  .variant-one-comment-context { margin-block-start: 2px; color: #8496a2 !important; font-size: 12px !important; line-height: 18px !important; }
+
+  .page-comment-author { min-block-size: 24px; }
+  .page-comment-author strong { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .page-comment-context { inline-size: 100%; clear: both; }
+  .page-comment-menu { align-self: center; margin-block: 0; margin-inline-end: -8px; }
+  .comment-title { min-block-size: 24px; }
+  .comment-title .comment-menu { margin-block: 0; margin-inline-end: -8px; }
+  .variant-one-task-heading { min-block-size: 24px; }
+  .variant-one-task-identity { min-inline-size: 0; }
+  .variant-one-task-identity strong { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .variant-one-task-context { inline-size: 100%; clear: both; }
+  .reply-link { min-block-size: 24px; }
+
+  .page-comment-content, .comment-content { display: block !important; min-inline-size: 0; }
+  .page-comment-author { display: flex !important; align-items: center; inline-size: 100%; min-inline-size: 0; }
+  .page-comment-author strong { flex: 1 1 auto; }
+  .page-comment-author .page-comment-task-status { flex: 0 0 auto; }
+  .page-comment-author .page-comment-menu { flex: 0 0 auto; margin-inline-start: 8px; }
+  .page-comment-context, .variant-one-task-context, .variant-one-comment-context { display: block !important; inline-size: 100%; clear: both; float: none; }
+  .variant-one-task-summary { display: block !important; }
+
+  .page-task-details-toggle { display: inline-flex; align-items: center; gap: 4px; margin-block-start: 8px; padding-inline: 0; color: #286985; }
+  .page-task-details-toggle:hover, .page-task-details-toggle:focus-visible { background: transparent; color: #0078d2; }
+
+  .page-comments-card .page-comment.is-task-reply { margin-inline-start: 32px; padding-inline-start: 12px; border-inline-start: 2px solid #d6e0e7; background: #f7f9fb; }
+  .page-comments-card .page-comment.is-task-reply::before { display: none; }
+  .page-task-details-toggle { min-block-size: 24px; padding-inline: 0; font-weight: 500; }
+
+  .variant-two-object-card .comment:has(.task-summary) { margin-block: 0; padding: 12px 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+  .variant-two-object-card .comment:has(.task-summary) + .comment::before { display: block; inset-inline-start: 0; background: rgba(0,65,102,.12); }
+  .variant-two-object-card .comment:has(.task-summary) + .comment:has(.task-summary)::before { display: block; }
+
+  .variant-two-object-card .variant-two-task-history { grid-column: 1; margin: 8px 0 0; padding: 12px 0 4px; border-block-start: 1px solid rgba(0,65,102,.12); }
+  .variant-two-history-step { position: relative; display: grid; grid-template-columns: 20px minmax(0,1fr); gap: 8px; min-inline-size: 0; padding: 10px 0; }
+  .variant-two-history-step:not(:last-child)::before { content: ""; position: absolute; inset-block: 28px 0; inset-inline-start: 9px; inline-size: 1px; background: #d6e0e7; }
+  .variant-two-history-marker { z-index: 1; display: block; inline-size: 12px; block-size: 12px; margin: 2px auto 0; box-sizing: border-box; border: 2px solid #8195a4; border-radius: 50%; background: #fff; }
+  .variant-two-history-step.status-progress .variant-two-history-marker { border-color: #f38b00; box-shadow: 0 0 0 2px #fff; }
+  .variant-two-history-step.status-closed .variant-two-history-marker { border-color: #22c38e; box-shadow: 0 0 0 2px #fff; }
+  .variant-two-history-content { min-inline-size: 0; }
+  .variant-two-history-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; min-inline-size: 0; }
+  .variant-two-history-head strong { min-inline-size: 0; overflow: hidden; color: #002033; font-size: 12px; line-height: 18px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+  .variant-two-history-head time { flex: 0 0 auto; color: rgba(0,32,51,.52); font-size: 11px; line-height: 16px; white-space: nowrap; }
+  .variant-two-history-author { margin-block-start: 2px; color: #7b8f9d; font-size: 11px; line-height: 16px; }
+  .variant-two-history-transition { display: flex; align-items: center; gap: 6px; margin-block-start: 6px; color: #286985; font-size: 11px; line-height: 16px; }
+  .variant-two-history-transition span { padding: 2px 6px; border-radius: 4px; background: #edf3f6; }
+  .variant-two-history-transition span:last-child { background: #fff1db; color: #b85f00; }
+  .variant-two-history-step.status-closed .variant-two-history-transition span:last-child { background: #e3f7ef; color: #007d5f; }
+  .variant-two-history-transition b { color: #7b8f9d; font-weight: 500; }
+  .variant-two-history-content p { margin: 6px 0 0; color: #002033; font-size: 12px; line-height: 18px; }
+  .variant-two-history-content > small { display: block; margin-block-start: 4px; color: rgba(0,32,51,.58); font-size: 11px; line-height: 16px; }
+
+  .variant-two-history-assignee { margin-block-start: 4px; color: rgba(0,32,51,.62); font-size: 11px; line-height: 16px; }
+
+  .variant-two-object-card .comment:has(.task-summary) { margin-block: 8px; padding: 12px; border: 1px solid rgba(0,65,102,.16); border-radius: 8px; background: #fff; box-shadow: none; }
+  .variant-two-object-card .comment:has(.task-summary) + .comment::before { display: none; }
+  .variant-two-object-card .comment.is-related-task::after { border-radius: 8px 0 0 8px; }
+  .variant-two-object-card .comment:has(.task-summary) > .task-history-link { justify-content: flex-start !important; justify-self: stretch; text-align: start; }
+
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link {
+  display: inline-flex;
+  inline-size: auto;
+  justify-self: start;
+  margin: 8px 0 0;
+  padding: 0;
+  border-block-start: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #286985;
+  font-weight: 400;
+  justify-content: flex-start !important;
+}
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link:hover,
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link:focus-visible {
+  background: transparent;
+  color: #0078d2;
+}
+
+
+/* Variant 2 task rhythm: keep related content close and separate distinct cards. */
+.variant-two-object-card .comments {
+  padding-block: 8px 16px;
+}
+.variant-two-object-card .comment:has(.task-summary) {
+  margin-block: 12px;
+  padding: 14px 12px 12px;
+}
+.variant-two-object-card .task-card-schedule {
+  margin-block-start: 12px;
+}
+.variant-two-object-card .task-card-parties {
+  margin-block-start: 12px;
+  padding-block: 12px;
+}
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link {
+  margin-block-start: 10px;
+  min-block-size: 24px;
+}
+.variant-two-object-card .variant-two-task-history {
+  margin-block-start: 10px;
+  padding-block: 12px 4px;
+}
+.variant-two-object-card .comment:has(.task-summary) + .comment::before {
+  display: none;
+}
+
+
+/* Variant 2 card spacing refinement. */
+.variant-two-object-card .comment:has(.task-summary) {
+  padding: 12px;
+}
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link,
+.variant-two-object-card .variant-two-task-history {
+  margin-block-start: 8px;
+}
+
+
+/* Variant 2: tighten the transition from task parties to history. */
+.variant-two-object-card .task-card-parties {
+  padding-block: 12px 4px;
+}
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link {
+  margin-block-start: 4px;
+}
+
+
+/* Variant 2 task menu control is a compact xs hit area. */
+.variant-two-object-card .task-card-heading .comment-menu {
+  inline-size: 24px;
+  block-size: 24px;
+  min-inline-size: 24px;
+  min-block-size: 24px;
+  padding: 0;
+}
+
+
+/* Variant 2 task hover state. */
+.variant-two-object-card .comment:has(.task-summary) {
+  transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+.variant-two-object-card .comment:has(.task-summary):hover {
+  background: #f4f9fc;
+  border-color: rgba(0,120,210,.28);
+  box-shadow: 0 2px 8px rgba(0,65,102,.08);
+}
+@media (prefers-reduced-motion: reduce) {
+  .variant-two-object-card .comment:has(.task-summary) {
+    transition: none;
+  }
+}
+
+
+/* Variant 2 task menu aligns to the card's 12px inset. */
+.variant-two-object-card .task-card-heading .comment-menu {
+  margin: 0;
+}
+
+
+/* Variant 2 task cards use an 8px gap between siblings. */
+.variant-two-object-card .comment:has(.task-summary) {
+  margin-block: 8px;
+}
+
+
+/* Variant 2 task status stays aligned to the right edge. */
+.variant-two-object-card .task-card-schedule .task-status-badge {
+  margin-inline-start: auto;
+}
+
+
+/* Variant 2 task cards: compact content with a full-width history footer. */
+.variant-two-object-card .task-card-schedule {
+  margin-block-start: 8px;
+}
+.variant-two-object-card .task-card-parties {
+  margin-block-start: 8px;
+  padding-block: 8px;
+}
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link {
+  inline-size: calc(100% + 24px);
+  justify-self: stretch;
+  box-sizing: border-box;
+  margin: 8px -12px -12px;
+  padding: 8px 12px;
+  border-block-start: 1px solid rgba(0,65,102,.12);
+  border-radius: 0;
+  text-align: start;
+}
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link:hover,
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link:focus-visible {
+  background: #f4f9fc;
+}
+.variant-two-object-card .variant-two-task-history {
+  inline-size: calc(100% + 24px);
+  margin: 8px -12px -12px;
+  padding: 8px 12px 4px;
+  box-sizing: border-box;
+  border-block-start: 0;
+}
+
+
+/* Variant 2 details toggle keeps a 4px icon-to-label gap. */
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link {
+  gap: 4px;
+}
+
+
+/* Variant 2 details label starts immediately after the icon. */
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link .Button-Label {
+  text-align: start;
+}
+
+
+/* Variant 2 task cards use a 14px inner left inset. */
+.variant-two-object-card .comment:has(.task-summary) {
+  padding-inline-start: 14px;
+}
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link,
+.variant-two-object-card .variant-two-task-history {
+  inline-size: calc(100% + 26px);
+  margin-inline-start: -14px;
+  margin-inline-end: -12px;
+}
+
+
+/* Variant 2 details footer aligns with the card content edge. */
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link,
+.variant-two-object-card .variant-two-task-history {
+  inline-size: 100%;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+
+/* Variant 2 details footer gets 2px of extra vertical breathing room. */
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link,
+.variant-two-object-card .variant-two-task-history {
+  margin-block-start: 10px;
+  margin-block-end: -10px;
+}
+
+
+/* Variant 2 task cards use one consistent 8px vertical spacing step. */
+.variant-two-object-card .task-card-schedule,
+.variant-two-object-card .task-card-parties {
+  margin-block-start: 8px;
+}
+.variant-two-object-card .task-card-parties {
+  padding-block: 8px;
+}
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link,
+.variant-two-object-card .variant-two-task-history {
+  margin-block-start: 8px;
+}
+
+
+/* Variant 2 sidebar uses Consta clear hover tokens consistently. */
+.variant-two-object-card .comment:has(.task-summary):hover,
+.variant-two-object-card .reply-link:hover,
+.variant-two-object-card .reply-link:focus-visible,
+.variant-two-object-card .comment-menu:hover,
+.variant-two-object-card .comment-menu:focus-visible {
+  background: var(--color-control-bg-clear-hover);
+}
+
+
+/* Variant 2 task hover keeps its border and uses a softer clear tint. */
+.variant-two-object-card .comment:has(.task-summary):hover {
+  border-color: rgba(0,65,102,.16);
+  background: color-mix(in srgb, var(--color-control-bg-clear-hover) 55%, transparent);
+}
+
+
+/* Variant 2 status tooltips stay inside the sidebar viewport. */
+.variant-two-object-card .status-tooltip::after {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+  max-inline-size: min(220px, calc(100vw - 32px));
+  white-space: normal;
+  text-align: start;
+  transform: translateY(2px);
+}
+.variant-two-object-card .status-tooltip::before {
+  inset-inline-start: auto;
+  inset-inline-end: 10px;
+  transform: translateY(2px) rotate(45deg);
+}
+.variant-two-object-card .status-tooltip:hover::after,
+.variant-two-object-card .status-tooltip:focus-visible::after {
+  transform: translateY(0);
+}
+.variant-two-object-card .status-tooltip:hover::before,
+.variant-two-object-card .status-tooltip:focus-visible::before {
+  transform: translateY(0) rotate(45deg);
+}
+
+
+/* Variant 2: the visible gap before details is exactly 4px. */
+.variant-two-object-card .task-card-parties {
+  padding-block-end: 4px;
+}
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link,
+.variant-two-object-card .variant-two-task-history {
+  margin-block-start: 0;
+}
+
+
+/* Variant 2 details footer has 8px above its label and 12px below. */
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link {
+  block-size: 40px;
+  min-block-size: 40px;
+  line-height: 24px;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-block: 8px;
+}
+.variant-two-object-card .variant-two-task-history {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-block-start: 8px;
+  padding-block-end: 0;
+}
+
+
+/* Variant 2 details footer sits flush with the card bottom. */
+.variant-two-object-card .comment:has(.task-summary) {
+  padding-block-end: 0;
+}
+
+
+/* Variant 2 task list starts 12px below its tabs and filter controls. */
+.variant-two-object-card .comments {
+  padding-block-start: 12px;
+}
+
+
+/* Variant 2 task list: keep the total first-card offset at 12px. */
+.variant-two-object-card .comment-filter {
+  margin-block-end: 0;
+}
+.variant-two-object-card .comments {
+  padding-block-start: 4px;
+}
+
+
+/* Variant 2 comments share a stable two-column rhythm. */
+.variant-two-object-card .comment:not(:has(.task-summary)) {
+  padding-block: 12px;
+}
+.variant-two-object-card .comment:not(:has(.task-summary)) .comment-title {
+  min-block-size: 24px;
+}
+.variant-two-object-card .comment:not(:has(.task-summary)) .comment-menu {
+  inline-size: 24px;
+  block-size: 24px;
+  min-inline-size: 24px;
+  min-block-size: 24px;
+  margin: 0;
+  padding: 0;
+}
+.variant-two-object-card .comment:not(:has(.task-summary)) .comment-time-below {
+  margin-block-start: 4px;
+  line-height: 14px;
+}
+.variant-two-object-card .comment:not(:has(.task-summary)) > .comment-content > p {
+  margin-block-start: 8px;
+}
+
+
+/* Variant 2 page task cards mirror the sidebar card shell. */
+.variant-two-object-card.page-comments-card .page-comment:has(.task-summary) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  margin: 8px 12px;
+  padding: 12px;
+  border: 1px solid rgba(0,65,102,.16);
+  border-radius: 8px;
+  background: #fff;
+}
+.variant-two-object-card.page-comments-card .page-comment:has(.task-summary) > .avatar {
+  display: none;
+}
+.variant-two-object-card.page-comments-card .page-comment:has(.task-summary) .page-comment-content {
+  min-inline-size: 0;
+}
+.variant-two-object-card.page-comments-card .page-comment:has(.task-summary) .page-comment-menu {
+  margin: 0;
+}
+.variant-two-object-card.page-comments-card .page-comment:has(.task-summary) .page-task-details-toggle {
+  display: inline-flex;
+  inline-size: 100%;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  gap: 4px;
+  min-block-size: 40px;
+  margin: 8px 0 -12px;
+  padding: 8px 12px;
+  border-block-start: 1px solid rgba(0,65,102,.12);
+  border-radius: 0;
+  text-align: start;
+}
+.variant-two-object-card.page-comments-card .page-comment:has(.task-summary) .page-task-details-toggle .Button-Label {
+  text-align: start;
+}
+
+
+/* Variant 2: only tasks involving the current user get a full-height blue rail. */
+.variant-two-object-card.page-comments-card .page-comment.is-task::before {
+  inset-block: -1px;
+  inset-inline-start: -1px;
+  inline-size: 4px;
+  border-radius: 8px 0 0 8px;
+  background: transparent;
+}
+.variant-two-object-card.page-comments-card .page-comment.is-task.is-related-task::before {
+  background: #0078d2;
+}
+.variant-two-object-card.page-comments-card .page-comment.is-task.status-new::before,
+.variant-two-object-card.page-comments-card .page-comment.is-task.status-progress::before,
+.variant-two-object-card.page-comments-card .page-comment.is-task.status-closed::before {
+  background: transparent;
+}
+.variant-two-object-card.page-comments-card .page-comment.is-task.is-related-task.status-new::before,
+.variant-two-object-card.page-comments-card .page-comment.is-task.is-related-task.status-progress::before,
+.variant-two-object-card.page-comments-card .page-comment.is-task.is-related-task.status-closed::before {
+  background: #0078d2;
+}
+
+
+/* Variant 2 task cards share an 8px rhythm and a soft hover fill. */
+.variant-two-object-card .comment:has(.task-summary),
+.variant-two-object-card.page-comments-card .page-comment:has(.task-summary) {
+  margin-block: 8px;
+  transition: background-color .16s ease, box-shadow .16s ease;
+}
+.variant-two-object-card .comment:has(.task-summary):hover,
+.variant-two-object-card.page-comments-card .page-comment:has(.task-summary):hover {
+  background: color-mix(in srgb, var(--color-control-bg-clear-hover) 55%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .variant-two-object-card .comment:has(.task-summary),
+  .variant-two-object-card.page-comments-card .page-comment:has(.task-summary) {
+    transition: none;
+  }
+}
+
+
+/* Variant 2 page task cards use a tighter 4px inter-card gap. */
+.variant-two-object-card.page-comments-card .page-comment:has(.task-summary) {
+  margin-block: 4px;
+}
+
+
+/* Variant 2: remove the divider below task filters. */
+.variant-two-object-card .page-task-filter { border-block-end: 0; }
+
+
+/* Variant 2: reduce secondary task-card typography while preserving the task title. */
+.variant-two-object-card .task-summary { font-size: 11px; line-height: 16px; }
+.variant-two-object-card .task-card-schedule > span:first-child { font-size: 11px; line-height: 14px; }
+.variant-two-object-card .task-status-badge { font-size: 11px; line-height: 14px; }
+.variant-two-object-card .task-card-parties small { font-size: 10px; line-height: 12px; }
+.variant-two-object-card .task-card-parties strong { font-size: 11px; line-height: 14px; }
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link { font-size: 11px; line-height: 16px; }
+.variant-two-object-card .variant-two-history-head strong { font-size: 11px; line-height: 16px; }
+.variant-two-object-card .variant-two-history-head time,
+.variant-two-object-card .variant-two-history-author,
+.variant-two-object-card .variant-two-history-transition,
+.variant-two-object-card .variant-two-history-content > small,
+.variant-two-object-card .variant-two-history-assignee { font-size: 10px; line-height: 14px; }
+.variant-two-object-card .variant-two-history-content p { font-size: 11px; line-height: 16px; }
+
+
+/* Variant 2: keep author and assignee on one line. */
+.variant-two-object-card .task-card-parties > span { display: flex; align-items: baseline; gap: 4px; min-inline-size: 0; }
+.variant-two-object-card .task-card-parties small { flex: 0 0 auto; }
+.variant-two-object-card .task-card-parties strong { min-inline-size: 0; margin-block-start: 0; }
+
+
+/* Variant 2: place author and assignee inline with no column gap. */
+.variant-two-object-card .task-card-parties { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0; }
+.variant-two-object-card .task-card-parties > span { flex: 0 0 auto; }
+.variant-two-object-card .task-card-parties > span:first-child::after { content: ","; }
+
+
+/* Variant 2: match the author and assignee reference treatment. */
+.variant-two-object-card .task-card-parties { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 14px; }
+.variant-two-object-card .task-card-parties > span { display: flex; align-items: baseline; gap: 4px; min-inline-size: 0; }
+.variant-two-object-card .task-card-parties small::after { content: " ·"; }
+.variant-two-object-card .task-card-parties > span:first-child::after { content: none; }
+.variant-two-object-card .task-card-parties strong { color: #002033; font-weight: 400; }
+
+
+/* Variant 2: match the creation/status row reference. */
+.variant-two-object-card .task-card-schedule { gap: 10px; }
+.variant-two-object-card .task-card-created { min-inline-size: 0; }
+.variant-two-object-card .task-card-schedule-divider { flex: 0 0 1px; inline-size: 1px; block-size: 16px; margin-inline: 2px; background: rgba(0,65,102,.28); }
+.variant-two-object-card .task-card-parties small::after { content: ":"; }
+
+
+/* Variant 2: keep status immediately after the date divider and remove the parties divider. */
+.variant-two-object-card .task-card-schedule .task-status-badge { margin-inline-start: 0; }
+.variant-two-object-card .task-card-parties { border-block-start: 0; }
+
+
+/* Variant 2: compact status badge height. */
+.variant-two-object-card .task-status-badge { min-block-size: 20px; padding-block: 1px; line-height: 14px; }
+
+
+/* Variant 2: match parties text size to the creation row. */
+.variant-two-object-card .task-card-parties small,
+.variant-two-object-card .task-card-parties strong { font-size: 11px; line-height: 14px; }
+
+
+/* Variant 2: separate author and assignee with the same divider rhythm as date/status. */
+.variant-two-object-card .task-card-parties { column-gap: 10px; }
+.variant-two-object-card .task-card-parties > span + span { border-inline-start: 1px solid rgba(0,65,102,.28); padding-inline-start: 10px; }
+
+
+/* Variant 2: keep parties compact without a wide empty column. */
+.variant-two-object-card .task-card-parties { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; }
+.variant-two-object-card .task-card-parties > span { flex: 0 0 auto; }
+
+
+
+/* Variant 2: details label uses 11px text. */
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link,
+.variant-two-object-card .comment:has(.task-summary) > .task-history-link .Button-Label { font-size: 11px; }
+
+
+/* Variant 2: use a 4px vertical gap between task rows. */
+.variant-two-object-card .task-card-schedule,
+.variant-two-object-card .task-card-parties { margin-block-start: 4px; }
+
